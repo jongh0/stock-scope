@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockScope</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="header-logo">
+      <div class="logo-icon">SS</div>
+      <div>
+        <div class="header-title">StockScope</div>
+        <div class="header-sub">미국 주식 · ETF 모니터링</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="updated-label" id="updatedLabel">업데이트 로딩중...</span>
+      <button class="theme-btn" id="themeBtn" title="라이트/다크 전환">
+        <span class="theme-icon">☀</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 그룹 네비게이션 -->
+  <nav class="group-nav" id="groupNav"></nav>
+
+  <!-- 메인 -->
+  <main class="main">
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <span>데이터 로딩 중...</span>
+    </div>
+    <div class="error-msg" id="errorMsg" style="display:none">
+      <strong>데이터 없음</strong><br>
+      <code>update.bat</code>을 실행하여 데이터를 먼저 업데이트하세요.<br>
+      <br>
+      GitHub Actions를 설정한 경우, 워크플로우가 완료될 때까지 기다려 주세요.
+    </div>
+    <div id="tableContainer"></div>
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="site-footer">
+    데이터 출처: <a href="https://finance.yahoo.com" target="_blank">Yahoo Finance</a>
+    &nbsp;|&nbsp; 본 대시보드는 투자 조언이 아닙니다.
+    &nbsp;|&nbsp; <a href="https://github.com/jongh0/stock-scope" target="_blank">GitHub</a>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/sparkline.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

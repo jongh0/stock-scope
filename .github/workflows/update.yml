@@ -1,0 +1,51 @@
+name: Update Stock Data
+
+on:
+  schedule:
+    # 매시간 정각 실행 (UTC 기준, 미국 장중: 14:30~21:00 UTC)
+    - cron: '0 * * * *'
+  workflow_dispatch:   # 수동 실행 가능
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.USER_PAT }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-yfinance
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install yfinance pandas numpy requests --quiet
+
+      - name: Update stock data
+        run: python scripts/update_data.py
+        working-directory: stock-scope
+
+      - name: Commit and push data
+        run: |
+          git config user.name "Jongho Yang"
+          git config user.email "jongh0@users.noreply.github.com"
+          git add stock-scope/data/stocks.json
+          if git diff --staged --quiet; then
+            echo "No data changes, skipping commit."
+          else
+            git commit -m "chore: update stock data [$(date -u '+%Y-%m-%d %H:%M')]"
+            git push
+          fi
