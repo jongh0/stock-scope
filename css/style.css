@@ -479,17 +479,10 @@ body {
 .site-footer a:hover { color: var(--text); }
 
 /* ── 반응형 ────────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  /* 3년 차트 숨김 */
-  .col-spark:last-child,
-  th.col-spark:last-child { display: none; }
-}
-
 @media (max-width: 768px) {
   .main { padding: 10px; }
   .header { padding: 0 12px; }
 
-  /* 카테고리 네비게이션: 줄바꿈으로 한번에 전체 표시 */
   .group-nav {
     height: auto;
     flex-wrap: wrap;
@@ -499,31 +492,11 @@ body {
   }
   .group-btn { font-size: 11px; padding: 3px 9px; }
 
-  /* 1년 차트 숨김 */
-  .col-spark:nth-last-child(2),
-  th.col-spark:nth-last-child(2) { display: none; }
-
-  /* MACD 숨김 */
-  .col-macd { display: none; }
-
   .group-title { font-size: 13px; }
 }
 
 @media (max-width: 480px) {
   .main { padding: 8px; }
-  .header-sub { display: none; }
-
-  /* RSI 숨김 */
-  .col-rsi { display: none; }
-
-  /* 주간수익률 숨김 */
-  .col-week { display: none; }
-
-  .stock-table td,
-  .stock-table th { padding: 7px 8px; font-size: 11.5px; }
-
-  .col-name { min-width: 90px; max-width: 110px; }
-  .stock-name { font-size: 11px; }
 }
 
 /* ── 모바일 전용 요소 (데스크탑 숨김) ─────────────────── */
@@ -587,7 +560,7 @@ body {
     display: flex;
     align-items: baseline;
     gap: 7px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--text);
   }
@@ -634,17 +607,28 @@ body {
   .stock-row td.col-rsi::before  { content: 'RSI';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-macd::before { content: 'MACD';  font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
 
-  /* 행 4: 1년 차트 (전체 너비) */
+  /* 행 4: 30일 + 1년 차트 (2열) */
+  .stock-row td:nth-child(9),
   .stock-row td:nth-child(10) {
-    grid-column: 1 / 3;
     grid-row: 4;
-    display: block !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
     padding-top: 8px;
     margin-top: 2px;
     border-top: 1px solid var(--border);
   }
 
-  /* 30일, 3년 차트 숨김 */
-  .stock-row td:nth-child(9),
+  .stock-row td:nth-child(9)  { grid-column: 1; }
+  .stock-row td:nth-child(10) { grid-column: 2; }
+
+  .stock-row td:nth-child(9)::before  { content: '30일'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(10)::before { content: '1년';  font-size: 10px; color: var(--text-muted); }
+
+  .stock-row td:nth-child(9) .sparkline,
+  .stock-row td:nth-child(10) .sparkline { height: 20px; }
+
+  /* 3년 차트 숨김 */
   .stock-row td:nth-child(11) { display: none !important; }
 }
