@@ -55,7 +55,7 @@ function createSparkline(values, opts = {}) {
     </defs>
     <polygon points="${areaPts}" fill="url(#${id})"/>
     <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5"
-      stroke-linejoin="round" stroke-linecap="round"/>
+      stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
   </svg>`;
 }
 

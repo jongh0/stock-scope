@@ -216,12 +216,12 @@ class StockScope {
     return `
       <tr class="stock-row" data-ticker="${s.ticker}">
         <td class="col-name">
-          <span class="stock-name">${s.name}</span>
+          <span class="stock-name">${s.name}</span><span class="mobile-ticker">${s.ticker}</span>
         </td>
         <td class="col-ticker">
           <a href="${yahooUrl}" target="_blank" class="ticker-link">${s.ticker}</a>
         </td>
-        <td class="col-price">${priceStr}</td>
+        <td class="col-price">${priceStr}<span class="mobile-change ${dayCls}">${dayPct}</span></td>
         <td class="col-pct ${dayCls}">${dayPct}</td>
         <td class="col-pct col-week ${weekCls}">${weekPct}</td>
         <td class="col-mdd">
