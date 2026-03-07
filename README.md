@@ -10,7 +10,7 @@
 
 | 카테고리 | 종목 |
 |----------|------|
-| 주요지수 | VTI, VOO, QQQ, DIA, IWM, TLT, AGG, HYG |
+| 주요지수 | VOO, QQQ, DIA, IWM, TLT, AGG, HYG |
 | TOP 20 | 시가총액 상위 20개 종목 |
 | 섹터 ETF | XLK ~ XLC (10개 섹터) |
 | 원자재 ETF | GLD, SLV, CPER, USO, UNG, DBC, DBA |
@@ -43,7 +43,7 @@ update.bat    # 데이터 수동 갱신
 
 - 소스: [yfinance](https://github.com/ranaroussi/yfinance) (Yahoo Finance)
 - 갱신: GitHub Actions 매시간 자동 실행 (`.github/workflows/update.yml`)
-- 저장: `data/stocks.json` (87개 티커)
+- 저장: `data/stocks.json` (86개 티커)
 
 ## 요구사항
 

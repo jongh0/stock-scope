@@ -7,7 +7,6 @@ const GROUPS = [
     id: 'us-index',
     name: '주요지수',
     stocks: [
-      { name: '미국전체',   ticker: 'VTI' },
       { name: 'S&P500',     ticker: 'VOO' },
       { name: '나스닥100',  ticker: 'QQQ' },
       { name: '다우',       ticker: 'DIA' },

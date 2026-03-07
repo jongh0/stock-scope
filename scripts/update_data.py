@@ -35,7 +35,6 @@ TODAY = NOW.strftime("%Y-%m-%dT%H:%M:00")
 # 모든 티커 + 종목명 + 통화
 STOCKS = {
     # 주요지수 ETF
-    "VTI":       {"name": "미국전체",         "currency": "USD"},
     "VOO":       {"name": "S&P500",       "currency": "USD"},
     "QQQ":       {"name": "나스닥100",     "currency": "USD"},
     "DIA":       {"name": "다우",          "currency": "USD"},
