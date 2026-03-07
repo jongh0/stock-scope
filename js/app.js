@@ -2,6 +2,9 @@
    app.js - StockScope 메인 앱
    ============================================================ */
 
+const _SUN_ICON  = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+const _MOON_ICON = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+
 class StockScope {
   constructor() {
     this.data        = null;   // stocks.json 전체 데이터
@@ -43,22 +46,22 @@ class StockScope {
 
   /* ── 테마 ──────────────────────────────────────────────── */
   _bindTheme() {
-    const btn  = document.getElementById('themeBtn');
-    const icon = btn.querySelector('.theme-icon');
+    const btn = document.getElementById('themeBtn');
     const saved = localStorage.getItem('ss-theme') || 'dark';
-    this._applyTheme(saved, icon);
+    this._applyTheme(saved, btn);
 
     btn.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      this._applyTheme(next, icon);
+      this._applyTheme(next, btn);
       localStorage.setItem('ss-theme', next);
       if (this.data) this._render();   // 스파크라인 색 재렌더
     });
   }
 
-  _applyTheme(theme, icon) {
+  _applyTheme(theme, btn) {
     document.documentElement.dataset.theme = theme;
-    icon.textContent = theme === 'dark' ? '☀' : '☾';
+    btn.innerHTML = theme === 'dark' ? _SUN_ICON : _MOON_ICON;
+    btn.title = theme === 'dark' ? '라이트 모드' : '다크 모드';
   }
 
   /* ── 데이터 로드 ───────────────────────────────────────── */
@@ -204,9 +207,9 @@ class StockScope {
     const macdCls = this._macdClass(s.macd_hist, s.macd_up);
 
     // 스파크라인
-    const spark30  = createSparkline(s.hist_30d,  { width: 100, height: 30, upColor: up, downColor: down });
-    const spark1y  = createSparkline(s.hist_1y,   { width: 100, height: 30, upColor: up, downColor: down });
-    const spark3y  = createSparkline(s.hist_3y,   { width: 100, height: 30, upColor: up, downColor: down });
+    const spark30  = createSparkline(s.hist_30d,  { width: 72, height: 26, upColor: up, downColor: down });
+    const spark1y  = createSparkline(s.hist_1y,   { width: 72, height: 26, upColor: up, downColor: down });
+    const spark3y  = createSparkline(s.hist_3y,   { width: 72, height: 26, upColor: up, downColor: down });
 
     const yahooUrl = `https://finance.yahoo.com/quote/${s.ticker}`;
 

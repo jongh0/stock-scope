@@ -307,19 +307,23 @@ body {
   border-bottom: none;
 }
 
+.stock-row {
+  user-select: none;
+}
+
 .stock-row:hover td {
   background: var(--accent-dim);
 }
 
 /* ── 컬럼 너비 ────────────────────────────────────────────── */
-.col-name   { min-width: 120px; max-width: 150px; }
-.col-ticker { min-width: 52px; width: 60px; }
-.col-price  { min-width: 90px; }
-.col-pct    { min-width: 72px; }
-.col-mdd    { min-width: 80px; }
-.col-rsi    { min-width: 62px; }
-.col-macd   { min-width: 70px; }
-.col-spark  { min-width: 108px; padding: 4px 6px; }
+.col-name   { min-width: 100px; max-width: 130px; }
+.col-ticker { width: 52px; min-width: 52px; }
+.col-price  { min-width: 78px; }
+.col-pct    { min-width: 64px; }
+.col-mdd    { min-width: 68px; }
+.col-rsi    { min-width: 56px; }
+.col-macd   { min-width: 60px; }
+.col-spark  { width: 84px; min-width: 84px; max-width: 84px; padding: 4px 6px; }
 
 /* ── 종목명 sticky ─────────────────────────────────────────── */
 .stock-table th.col-name,
@@ -484,8 +488,16 @@ body {
 @media (max-width: 768px) {
   .main { padding: 10px; }
   .header { padding: 0 12px; }
-  .group-nav { padding: 0 10px; gap: 5px; }
-  .updated-label { display: none; }
+
+  /* 카테고리 네비게이션: 줄바꿈으로 한번에 전체 표시 */
+  .group-nav {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 6px 10px;
+    gap: 4px;
+    overflow-x: visible;
+  }
+  .group-btn { font-size: 11px; padding: 3px 9px; }
 
   /* 1년 차트 숨김 */
   .col-spark:nth-last-child(2),
@@ -495,7 +507,6 @@ body {
   .col-macd { display: none; }
 
   .group-title { font-size: 13px; }
-  .group-btn { font-size: 11px; padding: 4px 10px; }
 }
 
 @media (max-width: 480px) {

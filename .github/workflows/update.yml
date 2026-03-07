@@ -36,13 +36,12 @@ jobs:
 
       - name: Update stock data
         run: python scripts/update_data.py
-        working-directory: stock-scope
 
       - name: Commit and push data
         run: |
           git config user.name "Jongho Yang"
           git config user.email "jongh0@users.noreply.github.com"
-          git add stock-scope/data/stocks.json
+          git add data/stocks.json
           if git diff --staged --quiet; then
             echo "No data changes, skipping commit."
           else
