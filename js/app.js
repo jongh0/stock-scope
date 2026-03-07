@@ -18,6 +18,7 @@ class StockScope {
   async _init() {
     this._buildGroupNav();
     this._bindTheme();
+    this._bindSwipe();
     await this._loadData();
   }
 
@@ -42,6 +43,28 @@ class StockScope {
       b.classList.toggle('active', b.dataset.id === id);
     });
     this._render();
+  }
+
+  /* ── 스와이프 ───────────────────────────────────────────── */
+  _bindSwipe() {
+    let startX = 0, startY = 0;
+
+    document.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+
+      const idx = GROUPS.findIndex(g => g.id === this.activeGroup);
+      const next = dx < 0
+        ? (idx + 1) % GROUPS.length
+        : (idx - 1 + GROUPS.length) % GROUPS.length;
+      this._selectGroup(GROUPS[next].id);
+    }, { passive: true });
   }
 
   /* ── 테마 ──────────────────────────────────────────────── */
