@@ -316,14 +316,14 @@ body {
 }
 
 /* ── 컬럼 너비 ────────────────────────────────────────────── */
-.col-name   { min-width: 120px; max-width: 160px; }
+.col-name   { min-width: 90px; max-width: 120px; }
 .col-ticker { width: 60px; min-width: 60px; }
 .col-price  { min-width: 90px; }
 .col-pct    { min-width: 74px; }
 .col-mdd    { min-width: 78px; }
 .col-rsi    { min-width: 68px; }
 .col-macd   { min-width: 72px; }
-.col-spark  { width: 90px; min-width: 90px; max-width: 90px; padding: 4px 8px; }
+.col-spark  { min-width: 90px; padding: 4px 8px; text-align: center; }
 
 /* ── 종목명 sticky ─────────────────────────────────────────── */
 .stock-table th.col-name,
@@ -422,7 +422,7 @@ body {
 /* ── 스파크라인 ────────────────────────────────────────────── */
 .sparkline {
   display: block;
-  vertical-align: middle;
+  margin: 0 auto;
 }
 
 .spark-empty {

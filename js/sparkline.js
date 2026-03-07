@@ -46,7 +46,7 @@ function createSparkline(values, opts = {}) {
   const color = forceColor || (isUp ? upColor : downColor);
   const id = `sg${++_sparkId}`;
 
-  return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" class="sparkline">
+  return `<svg width="100%" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="sparkline">
     <defs>
       <linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="${color}" stop-opacity="0.25"/>
