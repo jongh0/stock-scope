@@ -67,6 +67,8 @@ STOCKS = {
     "CLSK":      {"name": "클린스파크",     "currency": "USD"},
     "HOOD":      {"name": "로빈후드",       "currency": "USD"},
     "BITQ":      {"name": "크립토 기업 ETF", "currency": "USD"},
+    # 스테이블코인 관련
+    "CRCL":      {"name": "서클",           "currency": "USD"},
     # 채권
     "TLT":       {"name": "장기국채",       "currency": "USD"},
     "AGG":       {"name": "채권종합",       "currency": "USD"},

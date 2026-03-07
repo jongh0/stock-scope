@@ -108,6 +108,9 @@ const GROUPS = [
       { name: '클린스파크',     ticker: 'CLSK' },   // BTC 채굴
       { name: '로빈후드',       ticker: 'HOOD' },   // 크립토 거래 + 스테이블코인
       { name: '크립토 기업 ETF', ticker: 'BITQ' },  // Bitwise 크립토 기업 ETF
+      // 스테이블코인 관련
+      { name: '서클',           ticker: 'CRCL' },  // USDC 발행사
+      { name: '페이팔',         ticker: 'PYPL' },  // PYUSD 스테이블코인
     ],
   },
   {

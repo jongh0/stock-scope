@@ -119,8 +119,8 @@ class StockScope {
     if (!group || !this.data) return;
 
     let stocks = group.stocks.map(s => ({
-      ...s,
       ...(this.data.stocks?.[s.ticker] || {}),
+      ...s,
     }));
 
     // 정렬

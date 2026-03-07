@@ -2,6 +2,10 @@
 
 미국 주식 · ETF 모니터링 대시보드
 
+**라이브 데모:** https://jongh0.github.io/stock-scope/
+
+---
+
 ## 카테고리
 
 | 카테고리 | 종목 |
@@ -12,7 +16,7 @@
 | 원자재 ETF | GLD, SLV, CPER, USO, UNG, DBC, DBA |
 | 배당 ETF | DGRO, VIG, SCHD, SPYD |
 | 지역 ETF | VGK, EWJ, EEM, KWEB, EWZ |
-| 크립토 | IBIT, FBTC, ETHA, COIN, MSTR, MARA, RIOT, CLSK, HOOD, BITQ |
+| 크립토 | IBIT, FBTC, ETHA, COIN, MSTR, MARA, RIOT, CLSK, HOOD, BITQ, CRCL, PYPL |
 | 빅테크 | AAPL, MSFT, GOOGL, AMZN, TSLA, META, NVDA |
 | 반도체 | NVDA, AVGO, ASML, AMD, TSM, INTC, QCOM |
 | 결제·금융 | JPM, V, MA, PYPL, BAC |
@@ -39,7 +43,7 @@ update.bat    # 데이터 수동 갱신
 
 - 소스: [yfinance](https://github.com/ranaroussi/yfinance) (Yahoo Finance)
 - 갱신: GitHub Actions 매시간 자동 실행 (`.github/workflows/update.yml`)
-- 저장: `data/stocks.json` (86개 티커)
+- 저장: `data/stocks.json` (87개 티커)
 
 ## 요구사항
 
