@@ -307,9 +307,7 @@ body {
   border-bottom: none;
 }
 
-.stock-row {
-  user-select: none;
-}
+.stock-row {}
 
 .stock-row:hover td {
   background: var(--accent-dim);
@@ -552,7 +550,6 @@ body {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 12px 14px;
-    user-select: none;
   }
 
   .stock-row:hover td { background: transparent; }

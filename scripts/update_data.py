@@ -298,14 +298,12 @@ def fetch_all():
             hist_3y_raw  = downsample_weekly(hist)  # 주봉 다운샘플
 
             # 배당률 + PER (info 1회 호출로 취득)
-            # yfinance는 dividendYield를 소수(0.0235) 또는 퍼센트(2.35) 형태로 혼재 반환
+            # trailingAnnualDividendRate(연간 배당금) / price 로 직접 계산 → 포맷 불일치 없음
             try:
                 info = yf.Ticker(ticker).info
-                dy = info.get('dividendYield') or info.get('trailingAnnualDividendYield')
-                if dy:
-                    dy = float(dy)
-                    div_yield = round(dy if dy > 1 else dy * 100, 2)
-                else:
+                div_rate = info.get('trailingAnnualDividendRate') or 0
+                div_yield = round(float(div_rate) / price * 100, 2) if div_rate and price else None
+                if div_yield and div_yield > 25:  # 25% 초과는 데이터 오류로 처리
                     div_yield = None
                 pe = info.get('trailingPE')
                 per = round(float(pe), 1) if pe else None
