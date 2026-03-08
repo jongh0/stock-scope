@@ -194,6 +194,61 @@ NO_PER_TICKERS = {
 
 
 # ──────────────────────────────────────────────────────────
+# 네이버 금융 (한국 종목 PER·배당률) - polling API 사용
+# ──────────────────────────────────────────────────────────
+import requests as _requests
+
+_NAVER_HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+
+def fetch_naver_bulk(code6_list):
+    """네이버 금융으로 KR 종목 PER·배당률(분배율) 일괄 취득.
+    반환: {code6: (per, div_yield)}
+
+    - 주식: polling API (eps/dv 필드)
+    - ETF:  ETF basic API (dividendYieldTtm 필드, PER=None)
+    """
+    result = {}
+
+    # 1) polling API로 주식 데이터 취득
+    etf_codes = []
+    try:
+        codes_str = ','.join(code6_list)
+        url = f'https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:{codes_str}'
+        r = _requests.get(url, headers=_NAVER_HEADERS, timeout=10)
+        if r.status_code == 200:
+            items = r.json().get('result', {}).get('areas', [{}])[0].get('datas', [])
+            for it in items:
+                code = it.get('cd', '')
+                nv  = it.get('nv') or 0
+                eps = it.get('eps')
+                dv  = it.get('dv')
+                per = round(nv / eps, 1) if eps and eps > 0 and nv else None
+                div_yield = round(dv / nv * 100, 2) if dv and dv > 0 and nv else None
+                result[code] = (per, div_yield)
+                if per is None and div_yield is None:
+                    etf_codes.append(code)   # ETF로 추정 → 별도 조회
+    except Exception as e:
+        print(f'  [Naver] polling 실패: {e}')
+        etf_codes = code6_list
+
+    # 2) ETF basic API로 분배율 취득 (per=None 유지)
+    for code in etf_codes:
+        try:
+            url = f'https://m.stock.naver.com/api/etf/{code}/basic'
+            r = _requests.get(url, headers=_NAVER_HEADERS, timeout=6)
+            if r.status_code != 200:
+                continue
+            d = r.json()
+            raw = d.get('dividendYieldTtm')   # 이미 % 단위
+            div_yield = round(float(raw), 2) if raw else None
+            result[code] = (None, div_yield)
+        except Exception:
+            pass
+
+    return result
+
+
+# ──────────────────────────────────────────────────────────
 # MACD 계산
 # ──────────────────────────────────────────────────────────
 def calc_macd(series, fast=12, slow=26, signal=9):
@@ -242,6 +297,11 @@ def fetch_all():
     )
 
     result = {"updated": TODAY, "stocks": {}}
+
+    # 한국 종목 PER·배당률 일괄 조회 (네이버 금융)
+    kr_codes = [t.split('.')[0] for t in ALL_TICKERS if t.endswith('.KS')]
+    naver_data = fetch_naver_bulk(kr_codes)
+    print(f"  [Naver] {len(naver_data)}/{len(kr_codes)}개 KR 종목 데이터 취득")
 
     for ticker in ALL_TICKERS:
         meta = STOCKS[ticker]
@@ -310,19 +370,26 @@ def fetch_all():
             hist_1y_raw  = hist.iloc[-252:]
             hist_3y_raw  = downsample_weekly(hist)  # 주봉 다운샘플
 
-            # 배당률 + PER (info 1회 호출로 취득)
-            # trailingAnnualDividendRate(연간 배당금) / price 로 직접 계산 → 포맷 불일치 없음
-            try:
-                info = yf.Ticker(ticker).info
-                div_rate = info.get('trailingAnnualDividendRate') or 0
-                div_yield = round(float(div_rate) / price * 100, 2) if div_rate and price else None
-                if div_yield and div_yield > 25:  # 25% 초과는 데이터 오류로 처리
+            # 배당률 + PER
+            if ticker.endswith('.KS'):
+                # 한국 종목 → 네이버 금융 (사전 일괄 조회 결과 사용)
+                code6 = ticker.split('.')[0]
+                per, div_yield = naver_data.get(code6, (None, None))
+                if ticker in NO_PER_TICKERS:
+                    per = None
+            else:
+                # 미국 종목 → yfinance
+                try:
+                    info = yf.Ticker(ticker).info
+                    div_rate = info.get('trailingAnnualDividendRate') or 0
+                    div_yield = round(float(div_rate) / price * 100, 2) if div_rate and price else None
+                    if div_yield and div_yield > 25:  # 25% 초과는 데이터 오류로 처리
+                        div_yield = None
+                    pe = info.get('trailingPE')
+                    per = round(float(pe), 1) if pe and ticker not in NO_PER_TICKERS else None
+                except Exception:
                     div_yield = None
-                pe = info.get('trailingPE')
-                per = round(float(pe), 1) if pe and ticker not in NO_PER_TICKERS else None
-            except Exception:
-                div_yield = None
-                per = None
+                    per = None
 
             # 200일 이평선
             ma200_full = hist.rolling(200).mean()
