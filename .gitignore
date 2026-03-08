@@ -25,6 +25,7 @@ $RECYCLE.BIN/
 # ── IDE / 에디터 ───────────────────────────────────────────────
 .idea/
 .vscode/
+.claude/
 *.sublime-project
 *.sublime-workspace
 
