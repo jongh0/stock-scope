@@ -2,7 +2,7 @@
    style.css - StockScope
    ============================================================ */
 
-/* ── CSS 변수 (다크 테마 기본) ────────────────────────────── */
+/* CSS Variables (Dark Theme) */
 :root {
   --bg:           #0a0f1e;
   --surface:      #111827;
@@ -43,7 +43,7 @@
   --negative-bg:  rgba(220,38,38,0.08);
 }
 
-/* ── 기본 ─────────────────────────────────────────────────── */
+/* Base Reset */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
@@ -52,7 +52,10 @@ body {
   font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
-  min-height: 100vh;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: var(--header-h) var(--nav-h) minmax(0, 1fr) auto;
+  overflow: hidden;
   line-height: 1.5;
   font-size: 13px;
 }
@@ -61,10 +64,8 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
 
-/* ── 헤더 ─────────────────────────────────────────────────── */
+/* Header */
 .header {
-  position: sticky;
-  top: 0;
   z-index: 200;
   height: var(--header-h);
   padding: 0 20px;
@@ -144,10 +145,8 @@ body {
 
 .theme-btn:hover { background: var(--surface-3); color: var(--text); }
 
-/* ── 그룹 네비게이션 ───────────────────────────────────────── */
+/* Group Navigation */
 .group-nav {
-  position: sticky;
-  top: var(--header-h);
   z-index: 100;
   height: var(--nav-h);
   padding: 0 20px;
@@ -193,16 +192,42 @@ body {
   font-weight: 600;
 }
 
-/* ── 메인 콘텐츠 ──────────────────────────────────────────── */
+/* Main Content */
 .main {
-  padding: 20px;
-  max-width: 1600px;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 10px 12px 4px;
+  max-width: none;
   margin: 0 auto;
 }
 
-/* ── 그룹 섹션 ────────────────────────────────────────────── */
+
+#tableContainer {
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Group Section */
 .group-section {
-  margin-bottom: 24px;
+  margin-bottom: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.group-section.fill {
+  flex: 1 1 auto;
+}
+
+.group-section.fill .table-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
 }
 
 .group-title {
@@ -225,10 +250,44 @@ body {
   border-radius: 10px;
 }
 
-/* ── 테이블 ────────────────────────────────────────────────── */
+.ma-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.ma-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ma-line {
+  width: 14px;
+  height: 0;
+  border-top: 2px solid;
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+.ma-line-20 {
+  border-color: #38bdf8;
+}
+
+.ma-line-200 {
+  border-color: #f59e0b;
+}
+
+.ma-legend-mobile {
+  display: none;
+}
+/* Table Wrapper */
 .table-wrap {
   width: 100%;
-  overflow-x: auto;
+  overflow: auto;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--surface);
@@ -246,6 +305,11 @@ body {
 }
 
 .stock-table th {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background: var(--surface-2);
+  background-clip: padding-box;
   padding: 9px 16px;
   text-align: right;
   font-size: 11px;
@@ -313,8 +377,8 @@ body {
   background: var(--accent-dim);
 }
 
-/* ── 컬럼 너비 ────────────────────────────────────────────── */
-.col-name   { min-width: 90px; max-width: 120px; }
+/* Column Widths */
+.col-name   { width: 165px; min-width: 105px; max-width: 165px; }
 .col-ticker { width: 60px; min-width: 60px; }
 .col-price  { min-width: 90px; }
 .col-pct    { min-width: 74px; }
@@ -325,18 +389,19 @@ body {
 .col-macd   { min-width: 110px; }
 .col-spark  { min-width: 90px; padding: 4px 8px; text-align: center; }
 
-/* ── 종목명 sticky ─────────────────────────────────────────── */
+/* Sticky Name Column */
 .stock-table th.col-name,
 .stock-table td.col-name {
   position: sticky;
   left: 0;
   z-index: 2;
   background: var(--surface);
+  overflow: hidden;
 }
 
 .stock-table thead th.col-name {
   background: var(--surface-2);
-  z-index: 3;
+  z-index: 5;
 }
 
 .stock-row:hover td.col-name {
@@ -344,6 +409,11 @@ body {
 }
 
 .stock-name {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-weight: 500;
   color: var(--text);
 }
@@ -359,11 +429,11 @@ body {
   text-decoration: underline;
 }
 
-/* ── 수익률 색상 ───────────────────────────────────────────── */
+/* Gain/Loss Colors */
 .pos { color: var(--positive); font-weight: 600; }
 .neg { color: var(--negative); font-weight: 600; }
 
-/* ── MDD 배지 ─────────────────────────────────────────────── */
+/* MDD Badge Styles */
 .mdd-badge {
   display: inline-block;
   padding: 2px 7px;
@@ -383,7 +453,7 @@ body {
 [data-theme="light"] .mdd-severe   { background: rgba(239,68,68,0.12);  color: #b91c1c; }
 [data-theme="light"] .mdd-critical { background: rgba(239,68,68,0.2);   color: #991b1b; }
 
-/* ── RSI ──────────────────────────────────────────────────── */
+/* RSI Styles */
 .rsi-val {
   display: inline-block;
   padding: 1px 6px;
@@ -397,7 +467,7 @@ body {
 [data-theme="light"] .rsi-high { background: rgba(239,68,68,0.1);  color: #b91c1c; }
 [data-theme="light"] .rsi-low  { background: rgba(34,197,94,0.1);  color: #15803d; }
 
-/* ── MACD ──────────────────────────────────────────────────── */
+/* MACD Value Styles */
 .macd-val {
   display: inline-block;
   padding: 1px 5px;
@@ -406,20 +476,20 @@ body {
   font-weight: 600;
 }
 
-/* 강세 강화: hist > 0, 증가 → 진초록 */
+/* MACD Bull Strong */
 .macd-bull-strong { color: var(--positive); }
-/* 강세 약화: hist > 0, 감소 → 흐린초록 */
+/* MACD Bull Weak */
 .macd-bull-weak   { color: #4ade80; opacity: 0.7; }
-/* 약세 개선: hist < 0, 증가 → 흐린빨강 */
+/* MACD Bear Weak */
 .macd-bear-weak   { color: var(--negative); opacity: 0.6; }
-/* 약세 강화: hist < 0, 감소 → 진빨강 + 배경 */
+/* MACD Bear Strong */
 .macd-bear-strong { background: rgba(239,68,68,0.12); color: var(--negative); }
 
 [data-theme="light"] .macd-bull-weak   { color: #15803d; opacity: 0.65; }
 [data-theme="light"] .macd-bear-weak   { color: #b91c1c; opacity: 0.6; }
 [data-theme="light"] .macd-bear-strong { background: rgba(220,38,38,0.1); color: #b91c1c; }
 
-/* ── 인디케이터 셀 (RSI / MACD 차트 + 값) ──────────────────── */
+/* Indicator Cells */
 .indicator-cell {
   display: flex;
   align-items: center;
@@ -434,7 +504,7 @@ body {
   height: 22px;
 }
 
-/* ── 스파크라인 ────────────────────────────────────────────── */
+/* Sparklines */
 .sparkline {
   display: block;
   margin: 0 auto;
@@ -445,7 +515,7 @@ body {
   font-size: 11px;
 }
 
-/* ── 로딩 ─────────────────────────────────────────────────── */
+/* Loading State */
 .loading {
   display: flex;
   align-items: center;
@@ -467,7 +537,7 @@ body {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── 에러 ─────────────────────────────────────────────────── */
+/* Error State */
 .error-msg {
   margin: 40px auto;
   max-width: 480px;
@@ -481,20 +551,37 @@ body {
   line-height: 1.6;
 }
 
-/* ── 푸터 ─────────────────────────────────────────────────── */
+/* Footer */
 .site-footer {
   border-top: 1px solid var(--border);
-  padding: 16px 24px;
+  padding: 6px 12px;
   text-align: center;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-faint);
+  line-height: 1.3;
 }
 
 .site-footer a { color: var(--text-muted); text-decoration: none; }
 .site-footer a:hover { color: var(--text); }
 
-/* ── 반응형 ────────────────────────────────────────────────── */
+/* Responsive Layout (<=1500px) */
+@media (max-width: 1500px) {
+  body {
+    grid-template-rows: var(--header-h) auto minmax(0, 1fr) auto;
+  }
+
+  .group-nav {
+    height: auto;
+    flex-wrap: wrap;
+    overflow-x: visible;
+    padding: 6px 14px;
+    row-gap: 6px;
+  }
+}
 @media (max-width: 768px) {
+  body {
+    grid-template-rows: var(--header-h) auto minmax(0, 1fr) auto;
+  }
   .main { padding: 10px; }
   .header { padding: 0 12px; }
 
@@ -508,19 +595,31 @@ body {
   .group-btn { font-size: 11px; padding: 3px 9px; }
 
   .group-title { font-size: 13px; }
+  .ma-legend { font-size: 10px; gap: 8px; flex-wrap: wrap; }
 }
 
 @media (max-width: 480px) {
   .main { padding: 8px; }
 }
 
-/* ── 모바일 전용 요소 (데스크탑 숨김) ─────────────────── */
+/* Mobile-only Elements */
 .mobile-ticker { display: none; }
 .mobile-change { display: none; }
 
-/* ── 모바일 카드 뷰 (≤ 600px) ──────────────────────────── */
+/* Mobile Card Layout (<=600px) */
 @media (max-width: 600px) {
+  body {
+    height: auto;
+    min-height: 100dvh;
+    overflow: auto;
+    display: block;
+  }
+
+  .ma-legend-desktop { display: none; }
+  .ma-legend-mobile { display: inline; }
+
   .table-wrap {
+    max-height: none;
     border: none;
     background: transparent;
     border-radius: 0;
@@ -541,7 +640,7 @@ body {
     gap: 8px;
   }
 
-  /* 카드 */
+  /* Mobile Card Container */
   .stock-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -561,13 +660,13 @@ body {
     font-size: 13px;
   }
 
-  /* sticky 해제 */
+  /* Disable Sticky Name on Mobile */
   .stock-table td.col-name {
     position: static;
     z-index: auto;
   }
 
-  /* 행 1: 종목명+티커 (왼쪽) | 현재가+등락률 (가운데서부터) */
+  /* Mobile Row 1 Layout */
   .stock-row td.col-name {
     grid-column: 1;
     grid-row: 1;
@@ -607,30 +706,30 @@ body {
 
   .stock-row td.col-pct:not(.col-week) { display: none !important; }
 
-  /* 행 2: 주간% (왼쪽) | MDD (가운데서부터) */
+  /* Mobile Row 2 Layout */
   .stock-row td.col-week { grid-column: 1; grid-row: 2; display: flex !important; align-items: center; gap: 4px; }
   .stock-row td.col-mdd  { grid-column: 2; grid-row: 2; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
 
-  /* 행 3: 배당률 (왼쪽) | PER (오른쪽) */
+  /* Mobile Row 3 Layout */
   .stock-row td.col-div { grid-column: 1; grid-row: 3; display: flex !important; align-items: center; gap: 4px; }
   .stock-row td.col-per { grid-column: 2; grid-row: 3; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
 
-  /* RSI·MACD 모바일 숨김 */
+  /* Hide RSI/MACD on Mobile */
   .stock-row td.col-rsi  { display: none !important; }
   .stock-row td.col-macd { display: none !important; }
 
-  /* 항목 라벨 */
-  .stock-row td.col-week::before { content: '주간';  font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+  /* Mobile Field Labels */
+  .stock-row td.col-week::before { content: '雅뚯눊而?;  font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-mdd::before  { content: 'MDD';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
-  .stock-row td.col-div::before  { content: '배당률'; font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+  .stock-row td.col-div::before  { content: '獄쏄퀡??몴?; font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-per::before  { content: 'PER';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
 
-  /* 행 4: 1년 + 5년 차트 (2열), 30일 숨김 */
-  /* PER·배당률 컬럼 추가로 30일=11, 1년=12, 5년=13 */
-  .stock-row td:nth-child(11) { display: none !important; }
+  /* Mobile Chart Section */
+  /* Hide 5Y Chart on Mobile */
+  .stock-row td:nth-child(13) { display: none !important; }
 
-  .stock-row td:nth-child(12),
-  .stock-row td:nth-child(13) {
+  .stock-row td:nth-child(11),
+  .stock-row td:nth-child(12) {
     grid-row: 4;
     display: flex !important;
     flex-direction: column;
@@ -641,12 +740,12 @@ body {
     border-top: 1px solid var(--border);
   }
 
-  .stock-row td:nth-child(12) { grid-column: 1; }
-  .stock-row td:nth-child(13) { grid-column: 2; }
+  .stock-row td:nth-child(11) { grid-column: 1; }
+  .stock-row td:nth-child(12) { grid-column: 2; }
 
-  .stock-row td:nth-child(12)::before { content: '1년'; font-size: 10px; color: var(--text-muted); }
-  .stock-row td:nth-child(13)::before { content: '5년'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(11)::before { content: '30??; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(12)::before { content: '1??; font-size: 10px; color: var(--text-muted); }
 
-  .stock-row td:nth-child(12) .sparkline,
-  .stock-row td:nth-child(13) .sparkline { height: 20px; }
+  .stock-row td:nth-child(11) .sparkline,
+  .stock-row td:nth-child(12) .sparkline { height: 20px; }
 }

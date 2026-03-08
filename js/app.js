@@ -128,7 +128,7 @@ class StockScope {
       stocks = this._sort(stocks, this.sortCol, this.sortDir);
     }
 
-    container.innerHTML = this._buildTable(stocks, group.name);
+    container.innerHTML = this._buildTable(stocks, group.name, group.id);
     this._bindSort(container);
   }
 
@@ -157,7 +157,7 @@ class StockScope {
   }
 
   /* ── 테이블 HTML 생성 ──────────────────────────────────── */
-  _buildTable(stocks, groupName) {
+  _buildTable(stocks, groupName, groupId) {
     const { up, down, neutral } = getChartColors();
 
     const sortArrow = (col) => {
@@ -166,11 +166,19 @@ class StockScope {
     };
 
     const rows = stocks.map(s => this._buildRow(s, up, down, neutral)).join('');
+    const layoutClass = stocks.length >= 14 ? 'fill' : 'compact';
+
+    const legendHtml = groupId === 'us-index' ? `
+          <span class="ma-legend">
+            <span class="ma-legend-item"><span class="ma-line ma-line-20"></span>20일선(30일)</span>
+            <span class="ma-legend-item"><span class="ma-line ma-line-200"></span><span class="ma-legend-desktop">200일선(1년/5년)</span><span class="ma-legend-mobile">200일선(1년)</span></span>
+          </span>` : '';
 
     return `
-      <div class="group-section">
+      <div class="group-section ${layoutClass}">
         <div class="group-title">${groupName}
           <span class="group-count">${stocks.length}개</span>
+          ${legendHtml}
         </div>
         <div class="table-wrap">
           <table class="stock-table">
@@ -199,7 +207,6 @@ class StockScope {
       </div>
     `;
   }
-
   _buildRow(s, up, down, neutral) {
     const currency = TICKER_CURRENCY[s.ticker] || 'USD';
     const sym      = currency === 'KRW' ? '₩' : '$';
@@ -245,8 +252,19 @@ class StockScope {
       ? createMacdChart(s.macd_30d, { upColor: up, downColor: down })
       : '';
 
+    // 30일 차트는 20일 이동평균선 사용
+    const ma20_30d = (() => {
+      const vals = s.hist_30d || [];
+      return vals.map((_, i) => {
+        const start = Math.max(0, i - 19);
+        const w = vals.slice(start, i + 1);
+        if (w.some(v => v == null)) return null;
+        return w.reduce((a, b) => a + b, 0) / w.length;
+      });
+    })();
+
     // 스파크라인
-    const spark30  = createSparkline(s.hist_30d, { width: 72, height: 26, upColor: up, downColor: down, ma200: s.ma200_30d });
+    const spark30  = createSparkline(s.hist_30d, { width: 72, height: 26, upColor: up, downColor: down, maLine: ma20_30d, maColor: '#38bdf8' });
     const spark1y  = createSparkline(s.hist_1y,  { width: 72, height: 26, upColor: up, downColor: down, ma200: s.ma200_1y  });
     const spark3y  = createSparkline(s.hist_3y,  { width: 72, height: 26, upColor: up, downColor: down, ma200: s.ma200_3y  });
 

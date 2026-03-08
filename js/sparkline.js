@@ -23,13 +23,16 @@ function createSparkline(values, opts = {}) {
     downColor  = '#ef4444',
     forceColor = null,
     ma200      = null,
+    maLine     = null,
+    maColor    = '#f59e0b',
   } = opts;
 
   if (!values || values.length < 2) {
     return '<span class="spark-empty">-</span>';
   }
 
-  const validMa = ma200 ? ma200.filter(v => v != null) : [];
+  const movingAvg = maLine || ma200;
+  const validMa = movingAvg ? movingAvg.filter(v => v != null) : [];
   const min = Math.min(...values, ...validMa);
   const max = Math.max(...values, ...validMa);
   const range = max - min || 1;
@@ -48,14 +51,14 @@ function createSparkline(values, opts = {}) {
   const color = forceColor || (isUp ? upColor : downColor);
   const id = `sg${++_sparkId}`;
 
-  let ma200Line = '';
-  if (ma200 && ma200.length >= 2) {
-    const maPts = ma200
+  let maLineSvg = '';
+  if (movingAvg && movingAvg.length >= 2) {
+    const maPts = movingAvg
       .map((v, i) => v != null ? `${toX(i).toFixed(1)},${toY(v).toFixed(1)}` : null)
       .filter(Boolean)
       .join(' ');
     if (maPts) {
-      ma200Line = `<polyline points="${maPts}" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.8" vector-effect="non-scaling-stroke"/>`;
+      maLineSvg = `<polyline points="${maPts}" fill="none" stroke="${maColor}" stroke-width="1" opacity="0.8" vector-effect="non-scaling-stroke"/>`;
     }
   }
 
@@ -69,7 +72,7 @@ function createSparkline(values, opts = {}) {
     <polygon points="${areaPts}" fill="url(#${id})"/>
     <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5"
       stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-    ${ma200Line}
+    ${maLineSvg}
   </svg>`;
 }
 
