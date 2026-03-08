@@ -33,6 +33,7 @@ NOW = datetime.now(KST)
 TODAY = NOW.strftime("%Y-%m-%dT%H:%M:00")
 
 # 모든 티커 + 종목명 + 통화
+# NOTE: TOP 20 category in js/config.js uses US-listed market-cap ranking.
 STOCKS = {
     # 주요지수 ETF
     "VOO":       {"name": "S&P500",       "currency": "USD"},
@@ -84,7 +85,7 @@ STOCKS = {
     "VGK":       {"name": "유럽",           "currency": "USD"},
     "EWJ":       {"name": "일본",           "currency": "USD"},
     "EEM":       {"name": "신흥국",         "currency": "USD"},
-    "KWEB":      {"name": "중국",           "currency": "USD"},
+    "MCHI":      {"name": "중국",           "currency": "USD"},
     "EWZ":       {"name": "브라질",         "currency": "USD"},
     # 빅테크
     "AAPL":      {"name": "애플",               "currency": "USD"},

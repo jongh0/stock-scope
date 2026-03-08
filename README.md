@@ -11,14 +11,14 @@
 | 카테고리 | 내용 |
 |----------|------|
 | 주요지수 | VOO, QQQ, DIA, IWM, TLT, AGG, HYG |
-| TOP 20 | 미국 시가총액 상위 20개 종목 |
+| TOP 20 | 미국 상장 종목 시가총액 상위 20개 |
 | KR TOP 20 | 코스피 시가총액 상위 20개 종목 |
 | KR ETF | 국내 인기 ETF + 테마형 ETF (방산·AI·로봇·바이오·양자 등) |
 | 섹터 ETF | XLK ~ XLC (10개 섹터) |
 | 원자재 ETF | GLD, SLV, CPER, USO, UNG, DBC, DBA |
 | 배당 ETF | DGRO, VIG, SCHD, SPYD |
-| 지역 ETF | VGK, EWJ, EEM, KWEB, EWZ |
-| 크립토 | IBIT, FBTC, ETHA, COIN, MSTR, MARA, RIOT, CLSK, HOOD, BITQ, CRCL, PYPL |
+| 지역 ETF | VGK, EWJ, EEM, MCHI, EWZ |
+| 크립토 | IBIT, FBTC, ETHA, COIN, MSTR, MARA, RIOT, CLSK, HOOD, BITQ, CRCL |
 | 빅테크 | AAPL, MSFT, GOOGL, AMZN, TSLA, META, NVDA |
 | 반도체 | NVDA, AVGO, ASML, AMD, TSM, INTC, QCOM |
 | 결제·금융 | JPM, V, MA, PYPL, BAC |

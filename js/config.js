@@ -19,7 +19,7 @@ const GROUPS = [
   {
     id: 'top20',
     name: 'TOP 20',
-    // 2026 기준 미국 시가총액 상위 20개 종목
+    // 2026 기준 미국 상장 종목 시가총액 상위 20개
     stocks: [
       { name: '애플',           ticker: 'AAPL' },   // ~$3.5T
       { name: '엔비디아',       ticker: 'NVDA' },   // ~$2.8T
@@ -36,11 +36,11 @@ const GROUPS = [
       { name: 'JP모건',         ticker: 'JPM' },    // ~$0.6T
       { name: '비자',           ticker: 'V' },      // ~$0.55T
       { name: '마스터카드',     ticker: 'MA' },     // ~$0.5T
-      { name: '유나이티드헬스', ticker: 'UNH' },    // ~$0.45T
+      { name: '존슨앤존슨',     ticker: 'JNJ' },    // ~$0.45T
       { name: '엑손모빌',       ticker: 'XOM' },    // ~$0.45T
       { name: '코스트코',       ticker: 'COST' },   // ~$0.4T
       { name: '오라클',         ticker: 'ORCL' },   // ~$0.4T
-      { name: '넷플릭스',       ticker: 'NFLX' },   // ~$0.38T
+      { name: 'ASML',           ticker: 'ASML' },   // ~$0.38T
     ],
   },
   {
@@ -141,7 +141,7 @@ const GROUPS = [
       { name: '유럽',    ticker: 'VGK' },
       { name: '일본',    ticker: 'EWJ' },
       { name: '신흥국',  ticker: 'EEM' },
-      { name: '중국',    ticker: 'KWEB' },
+      { name: '중국',    ticker: 'MCHI' },
       { name: '브라질',  ticker: 'EWZ' },
     ],
   },
@@ -161,7 +161,6 @@ const GROUPS = [
       { name: '크립토 기업 ETF', ticker: 'BITQ' },  // Bitwise 크립토 기업 ETF
       // 스테이블코인 관련
       { name: '서클',           ticker: 'CRCL' },  // USDC 발행사
-      { name: '페이팔',         ticker: 'PYPL' },  // PYUSD 스테이블코인
     ],
   },
   {
