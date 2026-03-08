@@ -168,11 +168,11 @@ class StockScope {
     const rows = stocks.map(s => this._buildRow(s, up, down, neutral)).join('');
     const layoutClass = stocks.length >= 14 ? 'fill' : 'compact';
 
-    const legendHtml = groupId === 'us-index' ? `
+    const legendHtml = `
           <span class="ma-legend">
             <span class="ma-legend-item"><span class="ma-line ma-line-20"></span>20일선(30일)</span>
             <span class="ma-legend-item"><span class="ma-line ma-line-200"></span><span class="ma-legend-desktop">200일선(1년/5년)</span><span class="ma-legend-mobile">200일선(1년)</span></span>
-          </span>` : '';
+          </span>`;
 
     return `
       <div class="group-section ${layoutClass}">
@@ -189,6 +189,7 @@ class StockScope {
                 <th class="col-price" data-col="price">현재가 ${sortArrow('price')}</th>
                 <th class="col-pct" data-col="change_pct">일간(%) ${sortArrow('change_pct')}</th>
                 <th class="col-pct col-week" data-col="week_pct">주간(%) ${sortArrow('week_pct')}</th>
+                <th class="col-pct col-year" data-col="year_pct">연간(%) ${sortArrow('year_pct')}</th>
                 <th class="col-mdd" data-col="mdd_52w">MDD ${sortArrow('mdd_52w')}</th>
                 <th class="col-per" data-col="per">PER ${sortArrow('per')}</th>
                 <th class="col-div" data-col="div_yield">배당률 ${sortArrow('div_yield')}</th>
@@ -225,6 +226,10 @@ class StockScope {
     // 주간 수익률
     const weekPct = this._fmtPct(s.week_pct);
     const weekCls = this._pctClass(s.week_pct);
+
+    // 연간 수익률
+    const yearPct = this._fmtPct(s.year_pct);
+    const yearCls = this._pctClass(s.year_pct);
 
     // MDD (52w 고점 대비)
     const mddStr  = this._fmtPct(s.mdd_52w);
@@ -281,6 +286,7 @@ class StockScope {
         <td class="col-price">${priceStr}<span class="mobile-change ${dayCls}">${dayPct}</span></td>
         <td class="col-pct ${dayCls}">${dayPct}</td>
         <td class="col-pct col-week ${weekCls}">${weekPct}</td>
+        <td class="col-pct col-year ${yearCls}">${yearPct}</td>
         <td class="col-mdd">
           <span class="mdd-badge ${mddCls}">${mddStr}</span>
         </td>

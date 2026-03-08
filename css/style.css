@@ -382,11 +382,15 @@ body {
 .col-ticker { width: 60px; min-width: 60px; }
 .col-price  { min-width: 90px; }
 .col-pct    { min-width: 74px; }
+.col-year   { min-width: 74px; }
 .col-mdd    { min-width: 78px; }
 .col-per    { min-width: 68px; color: var(--text-muted); }
 .col-div    { min-width: 68px; color: var(--text-muted); }
 .col-rsi    { min-width: 110px; }
 .col-macd   { min-width: 110px; }
+
+.stock-table th.col-rsi,
+.stock-table th.col-macd { text-align: center; }
 .col-spark  { min-width: 90px; padding: 4px 8px; text-align: center; }
 
 /* Sticky Name Column */
@@ -705,6 +709,7 @@ body {
   }
 
   .stock-row td.col-pct:not(.col-week) { display: none !important; }
+  .stock-row td.col-year { display: none !important; }
 
   /* Mobile Row 2 Layout */
   .stock-row td.col-week { grid-column: 1; grid-row: 2; display: flex !important; align-items: center; gap: 4px; }
@@ -724,12 +729,12 @@ body {
   .stock-row td.col-div::before  { content: '배당률'; font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-per::before  { content: 'PER';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
 
-  /* Mobile Chart Section */
+  /* Mobile Chart Section (12=30일, 13=1년, 14=5년) */
   /* Hide 5Y Chart on Mobile */
-  .stock-row td:nth-child(13) { display: none !important; }
+  .stock-row td:nth-child(14) { display: none !important; }
 
-  .stock-row td:nth-child(11),
-  .stock-row td:nth-child(12) {
+  .stock-row td:nth-child(12),
+  .stock-row td:nth-child(13) {
     grid-row: 4;
     display: flex !important;
     flex-direction: column;
@@ -740,12 +745,12 @@ body {
     border-top: 1px solid var(--border);
   }
 
-  .stock-row td:nth-child(11) { grid-column: 1; }
-  .stock-row td:nth-child(12) { grid-column: 2; }
+  .stock-row td:nth-child(12) { grid-column: 1; }
+  .stock-row td:nth-child(13) { grid-column: 2; }
 
-  .stock-row td:nth-child(11)::before { content: '30일'; font-size: 10px; color: var(--text-muted); }
-  .stock-row td:nth-child(12)::before { content: '1년'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(12)::before { content: '30일'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(13)::before { content: '1년'; font-size: 10px; color: var(--text-muted); }
 
-  .stock-row td:nth-child(11) .sparkline,
-  .stock-row td:nth-child(12) .sparkline { height: 20px; }
+  .stock-row td:nth-child(12) .sparkline,
+  .stock-row td:nth-child(13) .sparkline { height: 20px; }
 }

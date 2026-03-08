@@ -182,6 +182,16 @@ STOCKS = {
 
 ALL_TICKERS = list(STOCKS.keys())
 
+# PER이 의미 없는 티커 (채권·원자재·크립토 ETF)
+NO_PER_TICKERS = {
+    # 채권
+    "TLT", "AGG", "HYG", "273130.KS",
+    # 원자재
+    "GLD", "SLV", "CPER", "USO", "UNG", "DBC", "DBA",
+    # 크립토 ETF (현물 보유, 이익 없음)
+    "IBIT", "FBTC", "ETHA", "BITQ",
+}
+
 
 # ──────────────────────────────────────────────────────────
 # MACD 계산
@@ -261,10 +271,12 @@ def fetch_all():
             price_5d = float(hist.iloc[idx_5])
             week_pct = (price - price_5d) / price_5d * 100
 
-            # 52주 고점 & MDD
+            # 52주 고점 & MDD & 연간 수익률
             hist_1y = hist.iloc[-252:]
             high_52w = float(hist_1y.max())
             mdd_52w  = (price - high_52w) / high_52w * 100
+            price_1y = float(hist_1y.iloc[0])
+            year_pct = (price - price_1y) / price_1y * 100
 
             # RSI
             rsi_series = calc_rsi(hist)
@@ -307,7 +319,7 @@ def fetch_all():
                 if div_yield and div_yield > 25:  # 25% 초과는 데이터 오류로 처리
                     div_yield = None
                 pe = info.get('trailingPE')
-                per = round(float(pe), 1) if pe else None
+                per = round(float(pe), 1) if pe and ticker not in NO_PER_TICKERS else None
             except Exception:
                 div_yield = None
                 per = None
@@ -326,6 +338,7 @@ def fetch_all():
                 "price":      round(price, 2),
                 "change_pct": round(change_pct, 2),
                 "week_pct":   round(week_pct, 2),
+                "year_pct":   round(year_pct, 2),
                 "mdd_52w":    round(mdd_52w, 2),
                 "per":        per,
                 "div_yield":  div_yield,
