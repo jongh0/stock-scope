@@ -1,6 +1,10 @@
 @echo off
 cd /d "%~dp0"
 
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":8080 "') do (
+    taskkill /f /pid %%a >nul 2>&1
+)
+
 echo [StockScope] Starting local server...
 echo   http://localhost:8080
 echo.

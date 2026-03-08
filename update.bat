@@ -6,10 +6,19 @@ echo.
 
 where py >nul 2>&1
 if %errorlevel% == 0 (
-    py scripts/update_data.py
+    set PY=py
 ) else (
-    python scripts/update_data.py
+    set PY=python
 )
+
+%PY% -c "import yfinance" >nul 2>&1
+if %errorlevel% neq 0 (
+    echo [StockScope] Installing required packages...
+    %PY% -m pip install yfinance pandas numpy requests --quiet
+    echo.
+)
+
+%PY% scripts/update_data.py
 
 if %errorlevel% neq 0 (
     echo.

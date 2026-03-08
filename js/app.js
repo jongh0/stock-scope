@@ -158,14 +158,14 @@ class StockScope {
 
   /* ── 테이블 HTML 생성 ──────────────────────────────────── */
   _buildTable(stocks, groupName) {
-    const { up, down } = getChartColors();
+    const { up, down, neutral } = getChartColors();
 
     const sortArrow = (col) => {
       if (this.sortCol !== col) return '<span class="sort-arrow">⇅</span>';
       return `<span class="sort-arrow active">${this.sortDir > 0 ? '↑' : '↓'}</span>`;
     };
 
-    const rows = stocks.map(s => this._buildRow(s, up, down)).join('');
+    const rows = stocks.map(s => this._buildRow(s, up, down, neutral)).join('');
 
     return `
       <div class="group-section">
@@ -182,11 +182,13 @@ class StockScope {
                 <th class="col-pct" data-col="change_pct">일간(%) ${sortArrow('change_pct')}</th>
                 <th class="col-pct col-week" data-col="week_pct">주간(%) ${sortArrow('week_pct')}</th>
                 <th class="col-mdd" data-col="mdd_52w">MDD ${sortArrow('mdd_52w')}</th>
+                <th class="col-per" data-col="per">PER ${sortArrow('per')}</th>
+                <th class="col-div" data-col="div_yield">배당률 ${sortArrow('div_yield')}</th>
                 <th class="col-rsi" data-col="rsi">RSI(14) ${sortArrow('rsi')}</th>
                 <th class="col-macd" data-col="macd_hist">MACD ${sortArrow('macd_hist')}</th>
                 <th class="col-spark">30일</th>
                 <th class="col-spark">1년</th>
-                <th class="col-spark">3년</th>
+                <th class="col-spark">5년</th>
               </tr>
             </thead>
             <tbody>
@@ -198,7 +200,7 @@ class StockScope {
     `;
   }
 
-  _buildRow(s, up, down) {
+  _buildRow(s, up, down, neutral) {
     const currency = TICKER_CURRENCY[s.ticker] || 'USD';
     const sym      = currency === 'KRW' ? '₩' : '$';
     const noData   = !s.price;
@@ -221,18 +223,32 @@ class StockScope {
     const mddStr  = this._fmtPct(s.mdd_52w);
     const mddCls  = this._mddClass(s.mdd_52w);
 
+    // PER
+    const perStr = s.per != null ? s.per.toFixed(1) : '-';
+
+    // 배당률
+    const divStr = s.div_yield != null && s.div_yield > 0
+      ? s.div_yield.toFixed(2) + '%'
+      : '-';
+
     // RSI
-    const rsiStr = s.rsi != null ? s.rsi.toFixed(1) : '-';
-    const rsiCls = this._rsiClass(s.rsi);
+    const rsiStr   = s.rsi != null ? s.rsi.toFixed(1) : '-';
+    const rsiCls   = this._rsiClass(s.rsi);
+    const rsiChart = s.rsi_30d?.length >= 2
+      ? createRsiChart(s.rsi_30d, { upColor: up, downColor: down, neutral })
+      : '';
 
     // MACD histogram
-    const macdStr = this._fmtMacd(s.macd_hist);
-    const macdCls = this._macdClass(s.macd_hist, s.macd_up);
+    const macdStr   = this._fmtMacd(s.macd_hist);
+    const macdCls   = this._macdClass(s.macd_hist, s.macd_up);
+    const macdChart = s.macd_30d?.length >= 2
+      ? createMacdChart(s.macd_30d, { upColor: up, downColor: down })
+      : '';
 
     // 스파크라인
-    const spark30  = createSparkline(s.hist_30d,  { width: 72, height: 26, upColor: up, downColor: down });
-    const spark1y  = createSparkline(s.hist_1y,   { width: 72, height: 26, upColor: up, downColor: down });
-    const spark3y  = createSparkline(s.hist_3y,   { width: 72, height: 26, upColor: up, downColor: down });
+    const spark30  = createSparkline(s.hist_30d, { width: 72, height: 26, upColor: up, downColor: down, ma200: s.ma200_30d });
+    const spark1y  = createSparkline(s.hist_1y,  { width: 72, height: 26, upColor: up, downColor: down, ma200: s.ma200_1y  });
+    const spark3y  = createSparkline(s.hist_3y,  { width: 72, height: 26, upColor: up, downColor: down, ma200: s.ma200_3y  });
 
     const yahooUrl = `https://finance.yahoo.com/quote/${s.ticker}`;
 
@@ -250,11 +266,19 @@ class StockScope {
         <td class="col-mdd">
           <span class="mdd-badge ${mddCls}">${mddStr}</span>
         </td>
+        <td class="col-per">${perStr}</td>
+        <td class="col-div">${divStr}</td>
         <td class="col-rsi">
-          <span class="rsi-val ${rsiCls}">${rsiStr}</span>
+          <div class="indicator-cell">
+            ${rsiChart}
+            <span class="rsi-val ${rsiCls}">${rsiStr}</span>
+          </div>
         </td>
         <td class="col-macd">
-          <span class="macd-val ${macdCls}">${macdStr}</span>
+          <div class="indicator-cell">
+            ${macdChart}
+            <span class="macd-val ${macdCls}">${macdStr}</span>
+          </div>
         </td>
         <td class="col-spark">${spark30}</td>
         <td class="col-spark">${spark1y}</td>
@@ -303,9 +327,7 @@ class StockScope {
   _fmtMacd(v) {
     if (v == null) return '-';
     const sign = v > 0 ? '+' : '';
-    const abs  = Math.abs(v);
-    const dec  = abs >= 10 ? 1 : abs >= 1 ? 2 : 3;
-    return sign + v.toFixed(dec);
+    return sign + v.toFixed(3) + '%';
   }
 
   _macdClass(hist, up) {

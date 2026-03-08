@@ -137,6 +137,46 @@ STOCKS = {
     # 기타 대형주
     "BRK-B":     {"name": "버크셔해서웨이",     "currency": "USD"},
     "ORCL":      {"name": "오라클",             "currency": "USD"},
+    # 한국 인기 ETF (코스피)
+    "360750.KS": {"name": "TIGER 미국S&P500",     "currency": "KRW"},
+    "133690.KS": {"name": "TIGER 미국나스닥100",  "currency": "KRW"},
+    "381180.KS": {"name": "TIGER 미국테크TOP10",  "currency": "KRW"},
+    "446720.KS": {"name": "SOL 미국배당다우존스", "currency": "KRW"},
+    "069500.KS": {"name": "KODEX 200",            "currency": "KRW"},
+    "122630.KS": {"name": "KODEX 레버리지",       "currency": "KRW"},
+    "114800.KS": {"name": "KODEX 인버스",         "currency": "KRW"},
+    "252670.KS": {"name": "KODEX 인버스2X",       "currency": "KRW"},
+    "139320.KS": {"name": "TIGER 원자재선물",     "currency": "KRW"},
+    "273130.KS": {"name": "KODEX 종합채권",         "currency": "KRW"},
+    # 테마형 ETF
+    "463250.KS": {"name": "TIGER K방산&우주",       "currency": "KRW"},
+    "395160.KS": {"name": "KODEX AI반도체",         "currency": "KRW"},
+    "487230.KS": {"name": "KODEX 미국AI전력인프라", "currency": "KRW"},
+    "445290.KS": {"name": "KODEX 로봇액티브",       "currency": "KRW"},
+    "261070.KS": {"name": "TIGER 코스닥바이오",     "currency": "KRW"},
+    "0023A0.KS": {"name": "SOL 미국양자컴퓨팅",    "currency": "KRW"},
+    "476690.KS": {"name": "TIGER 비만치료제",       "currency": "KRW"},
+    # 한국 시가총액 상위 (코스피)
+    "005930.KS": {"name": "삼성전자",           "currency": "KRW"},
+    "000660.KS": {"name": "SK하이닉스",         "currency": "KRW"},
+    "373220.KS": {"name": "LG에너지솔루션",     "currency": "KRW"},
+    "207940.KS": {"name": "삼성바이오로직스",   "currency": "KRW"},
+    "005380.KS": {"name": "현대차",             "currency": "KRW"},
+    "329180.KS": {"name": "HD현대중공업",       "currency": "KRW"},
+    "402340.KS": {"name": "SK스퀘어",           "currency": "KRW"},
+    "012450.KS": {"name": "한화에어로스페이스", "currency": "KRW"},
+    "034020.KS": {"name": "두산에너빌리티",     "currency": "KRW"},
+    "105560.KS": {"name": "KB금융",             "currency": "KRW"},
+    "000270.KS": {"name": "기아",               "currency": "KRW"},
+    "068270.KS": {"name": "셀트리온",           "currency": "KRW"},
+    "028260.KS": {"name": "삼성물산",           "currency": "KRW"},
+    "035420.KS": {"name": "NAVER",              "currency": "KRW"},
+    "055550.KS": {"name": "신한지주",           "currency": "KRW"},
+    "042660.KS": {"name": "한화오션",           "currency": "KRW"},
+    "012330.KS": {"name": "현대모비스",         "currency": "KRW"},
+    "032830.KS": {"name": "삼성생명",           "currency": "KRW"},
+    "015760.KS": {"name": "한국전력",           "currency": "KRW"},
+    "086790.KS": {"name": "하나금융지주",       "currency": "KRW"},
 }
 
 ALL_TICKERS = list(STOCKS.keys())
@@ -167,7 +207,7 @@ def calc_rsi(series, period=14):
 
 
 # ──────────────────────────────────────────────────────────
-# 히스토리 다운샘플 (3년 → 주봉)
+# 히스토리 다운샘플 (5년 → 주봉)
 # ──────────────────────────────────────────────────────────
 def downsample_weekly(series):
     return series.resample('W').last().dropna()
@@ -180,10 +220,10 @@ def fetch_all():
     print(f"\n[StockScope] 데이터 업데이트 시작: {TODAY}")
     print(f"  총 {len(ALL_TICKERS)}개 티커 다운로드 중...")
 
-    # 3년치 일봉 일괄 다운로드
+    # 5년치 일봉 일괄 다운로드
     raw = yf.download(
         ALL_TICKERS,
-        period="3y",
+        period="5y",
         auto_adjust=True,
         progress=True,
         group_by="ticker",
@@ -229,17 +269,25 @@ def fetch_all():
             rsi_series = calc_rsi(hist)
             rsi_clean  = rsi_series.dropna()
             rsi = float(rsi_clean.iloc[-1]) if not rsi_clean.empty else None
+            rsi_30d = [round(float(v), 1) for v in rsi_clean.iloc[-30:].values] if not rsi_clean.empty else []
 
-            # MACD histogram
+            # MACD histogram (가격 대비 % 정규화 → USD/KRW 비교 가능)
             macd_hist_series = calc_macd(hist)
             macd_clean = macd_hist_series.dropna()
             if len(macd_clean) >= 2:
-                macd_hist = float(macd_clean.iloc[-1])
-                macd_prev = float(macd_clean.iloc[-2])
+                macd_hist = float(macd_clean.iloc[-1]) / price * 100
+                macd_prev = float(macd_clean.iloc[-2]) / price * 100
                 macd_up   = macd_hist > macd_prev
             else:
                 macd_hist = None
                 macd_up   = None
+            if len(macd_clean) >= 2:
+                macd_30d_series = macd_clean.iloc[-30:]
+                hist_30d_aligned = hist.reindex(macd_30d_series.index)
+                macd_30d = [round(float(v) / float(p) * 100, 4)
+                            for v, p in zip(macd_30d_series.values, hist_30d_aligned.values)]
+            else:
+                macd_30d = []
 
             # 히스토리 배열 (스파크라인용, 소수점 2자리)
             def to_list(s):
@@ -249,6 +297,30 @@ def fetch_all():
             hist_1y_raw  = hist.iloc[-252:]
             hist_3y_raw  = downsample_weekly(hist)  # 주봉 다운샘플
 
+            # 배당률 + PER (info 1회 호출로 취득)
+            # yfinance는 dividendYield를 소수(0.0235) 또는 퍼센트(2.35) 형태로 혼재 반환
+            try:
+                info = yf.Ticker(ticker).info
+                dy = info.get('dividendYield') or info.get('trailingAnnualDividendYield')
+                if dy:
+                    dy = float(dy)
+                    div_yield = round(dy if dy > 1 else dy * 100, 2)
+                else:
+                    div_yield = None
+                pe = info.get('trailingPE')
+                per = round(float(pe), 1) if pe else None
+            except Exception:
+                div_yield = None
+                per = None
+
+            # 200일 이평선
+            ma200_full = hist.rolling(200).mean()
+            ma200_30d  = [round(float(v), 2) if pd.notna(v) else None for v in ma200_full.iloc[-30:].values]
+            ma200_1y   = [round(float(v), 2) if pd.notna(v) else None for v in ma200_full.iloc[-252:].values]
+            ma200_3y_weekly  = ma200_full.resample('W').last()
+            ma200_3y_aligned = ma200_3y_weekly.reindex(hist_3y_raw.index)
+            ma200_3y   = [round(float(v), 2) if pd.notna(v) else None for v in ma200_3y_aligned.values]
+
             result["stocks"][ticker] = {
                 "name":       meta["name"],
                 "currency":   meta["currency"],
@@ -256,12 +328,19 @@ def fetch_all():
                 "change_pct": round(change_pct, 2),
                 "week_pct":   round(week_pct, 2),
                 "mdd_52w":    round(mdd_52w, 2),
+                "per":        per,
+                "div_yield":  div_yield,
                 "rsi":        round(rsi, 1) if rsi is not None else None,
-                "macd_hist":  round(macd_hist, 3) if macd_hist is not None else None,
+                "rsi_30d":    rsi_30d,
+                "macd_hist":  round(macd_hist, 4) if macd_hist is not None else None,
                 "macd_up":    bool(macd_up) if macd_up is not None else None,
+                "macd_30d":   macd_30d,
                 "hist_30d":   to_list(hist_30d_raw),
                 "hist_1y":    to_list(hist_1y_raw),
                 "hist_3y":    to_list(hist_3y_raw),
+                "ma200_30d":  ma200_30d,
+                "ma200_1y":   ma200_1y,
+                "ma200_3y":   ma200_3y,
             }
             rsi_str  = f"{rsi:.1f}"  if rsi is not None  else "-"
             macd_str = f"{macd_hist:.3f}" if macd_hist is not None else "-"

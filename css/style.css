@@ -321,8 +321,10 @@ body {
 .col-price  { min-width: 90px; }
 .col-pct    { min-width: 74px; }
 .col-mdd    { min-width: 78px; }
-.col-rsi    { min-width: 68px; }
-.col-macd   { min-width: 72px; }
+.col-per    { min-width: 68px; color: var(--text-muted); }
+.col-div    { min-width: 68px; color: var(--text-muted); }
+.col-rsi    { min-width: 110px; }
+.col-macd   { min-width: 110px; }
 .col-spark  { min-width: 90px; padding: 4px 8px; text-align: center; }
 
 /* ── 종목명 sticky ─────────────────────────────────────────── */
@@ -418,6 +420,21 @@ body {
 [data-theme="light"] .macd-bull-weak   { color: #15803d; opacity: 0.65; }
 [data-theme="light"] .macd-bear-weak   { color: #b91c1c; opacity: 0.6; }
 [data-theme="light"] .macd-bear-strong { background: rgba(220,38,38,0.1); color: #b91c1c; }
+
+/* ── 인디케이터 셀 (RSI / MACD 차트 + 값) ──────────────────── */
+.indicator-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.indicator-chart {
+  flex: 1;
+  min-width: 0;
+  display: block;
+  height: 22px;
+}
 
 /* ── 스파크라인 ────────────────────────────────────────────── */
 .sparkline {
@@ -601,15 +618,27 @@ body {
   .stock-row td.col-rsi  { grid-column: 1; grid-row: 3; display: flex !important; align-items: center; gap: 4px; }
   .stock-row td.col-macd { grid-column: 2; grid-row: 3; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
 
+  .stock-row td.col-rsi .indicator-chart,
+  .stock-row td.col-macd .indicator-chart { display: none; }
+  .stock-row td.col-rsi .indicator-cell,
+  .stock-row td.col-macd .indicator-cell { display: contents; }
+
   /* 항목 라벨 */
   .stock-row td.col-week::before { content: '주간';  font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-mdd::before  { content: 'MDD';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-rsi::before  { content: 'RSI';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-macd::before { content: 'MACD';  font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
 
-  /* 행 4: 30일 + 1년 차트 (2열) */
-  .stock-row td:nth-child(9),
-  .stock-row td:nth-child(10) {
+  /* PER·배당률 모바일 숨김 */
+  .stock-row td.col-per { display: none !important; }
+  .stock-row td.col-div { display: none !important; }
+
+  /* 행 4: 1년 + 5년 차트 (2열), 30일 숨김 */
+  /* PER·배당률 컬럼 추가로 30일=11, 1년=12, 5년=13 */
+  .stock-row td:nth-child(11) { display: none !important; }
+
+  .stock-row td:nth-child(12),
+  .stock-row td:nth-child(13) {
     grid-row: 4;
     display: flex !important;
     flex-direction: column;
@@ -620,15 +649,12 @@ body {
     border-top: 1px solid var(--border);
   }
 
-  .stock-row td:nth-child(9)  { grid-column: 1; }
-  .stock-row td:nth-child(10) { grid-column: 2; }
+  .stock-row td:nth-child(12) { grid-column: 1; }
+  .stock-row td:nth-child(13) { grid-column: 2; }
 
-  .stock-row td:nth-child(9)::before  { content: '30일'; font-size: 10px; color: var(--text-muted); }
-  .stock-row td:nth-child(10)::before { content: '1년';  font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(12)::before { content: '1년'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(13)::before { content: '5년'; font-size: 10px; color: var(--text-muted); }
 
-  .stock-row td:nth-child(9) .sparkline,
-  .stock-row td:nth-child(10) .sparkline { height: 20px; }
-
-  /* 3년 차트 숨김 */
-  .stock-row td:nth-child(11) { display: none !important; }
+  .stock-row td:nth-child(12) .sparkline,
+  .stock-row td:nth-child(13) .sparkline { height: 20px; }
 }
