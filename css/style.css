@@ -719,9 +719,9 @@ body {
   .stock-row td.col-macd { display: none !important; }
 
   /* Mobile Field Labels */
-  .stock-row td.col-week::before { content: '雅뚯눊而?;  font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+  .stock-row td.col-week::before { content: '주간';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-mdd::before  { content: 'MDD';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
-  .stock-row td.col-div::before  { content: '獄쏄퀡??몴?; font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+  .stock-row td.col-div::before  { content: '배당률'; font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-per::before  { content: 'PER';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
 
   /* Mobile Chart Section */
@@ -743,8 +743,8 @@ body {
   .stock-row td:nth-child(11) { grid-column: 1; }
   .stock-row td:nth-child(12) { grid-column: 2; }
 
-  .stock-row td:nth-child(11)::before { content: '30??; font-size: 10px; color: var(--text-muted); }
-  .stock-row td:nth-child(12)::before { content: '1??; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(11)::before { content: '30일'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(12)::before { content: '1년'; font-size: 10px; color: var(--text-muted); }
 
   .stock-row td:nth-child(11) .sparkline,
   .stock-row td:nth-child(12) .sparkline { height: 20px; }
