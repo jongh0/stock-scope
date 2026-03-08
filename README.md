@@ -10,23 +10,23 @@
 
 | 카테고리 | 내용 |
 |----------|------|
-| 주요지수 | VOO, QQQ, DIA, IWM, TLT, AGG, HYG |
+| 주요지수 | VOO, QQQ, DIA, IWM, BIL, AGG, TLT, HYG |
 | TOP 20 | 미국 상장 종목 시가총액 상위 20개 |
 | KR TOP 20 | 코스피 시가총액 상위 20개 종목 |
 | KR ETF | 국내 인기 ETF + 테마형 ETF (방산·AI·로봇·바이오·양자 등) |
 | 섹터 ETF | XLK ~ XLC (10개 섹터) |
-| 원자재 ETF | GLD, SLV, CPER, USO, UNG, DBC, DBA |
-| 배당 ETF | DGRO, VIG, SCHD, SPYD |
-| 지역 ETF | VGK, EWJ, EEM, MCHI, EWZ |
-| 크립토 | IBIT, FBTC, ETHA, COIN, MSTR, MARA, RIOT, CLSK, HOOD, BITQ, CRCL |
+| 원자재 ETF | GLD, SLV, PPLT, CPER, USO, UNG, DBC, DBA, WEAT |
+| 배당 ETF | VIG, DGRO, SCHD, SPYD, JEPI, JEPQ |
+| 지역 ETF | VGK, EWJ, EWY, EWT, EEM, INDA, MCHI, EWZ |
+| 크립토 | IBIT, FBTC, ETHA, BITQ, COIN, MSTR, HOOD, CRCL, MARA, RIOT, CLSK |
 | 빅테크 | AAPL, MSFT, GOOGL, AMZN, TSLA, META, NVDA |
-| 반도체 | NVDA, AVGO, ASML, AMD, TSM, INTC, QCOM |
-| 결제·금융 | JPM, V, MA, PYPL, BAC |
-| 자동차·EV | TSLA, F, GM, RIVN |
-| 미디어·통신 | NFLX, DIS, VZ, T |
-| SW·클라우드 | ADBE, CRM, ADSK, PLTR |
-| 소비재 | WMT, COST, MCD, NKE, SBUX, KO |
-| 헬스케어 | UNH, JNJ, PFE, LLY |
+| 반도체 | NVDA, AVGO, ASML, TSM, ARM, AMD, QCOM, MU, AMAT, LRCX, INTC |
+| 결제·금융 | JPM, BAC, GS, MS, V, MA, AXP, SCHW, PYPL, XYZ |
+| 자동차·EV | TSLA, TM, GM, F, NIO, RIVN, LCID |
+| 미디어·통신 | NFLX, DIS, SPOT, TMUS, VZ, T, ROKU |
+| SW·클라우드 | MSFT, NOW, CRM, ADBE, SHOP, PLTR, SNOW, NET, DDOG, ADSK |
+| 소비재 | AMZN, WMT, COST, PG, KO, PM, MCD, TGT, SBUX, NKE, LULU |
+| 헬스케어 | UNH, LLY, ABBV, JNJ, MRK, AMGN, ISRG, PFE, DXCM |
 
 ## 표시 항목
 
@@ -35,7 +35,7 @@
 | 현재가 | USD / KRW 자동 구분 |
 | 일간(%) · 주간(%) · 연간(%) | 등락률 |
 | MDD | 52주 고점 대비 최대 낙폭 |
-| PER | Trailing P/E (채권·원자재·크립토 ETF 제외) |
+| PER | Trailing P/E (채권·원자재·ETF 계열 제외) |
 | 배당률 | TTM 기준 (KR ETF는 분배율) |
 | RSI(14) | 미니 라인 차트 + 수치 (30/70 기준선) |
 | MACD | 미니 히스토그램 차트 + 수치 (가격 대비 % 정규화) |
@@ -62,7 +62,7 @@ update.bat    # 데이터 수동 갱신 (패키지 자동 설치 포함)
 | 한국 ETF 분배율 | [네이버 금융](https://finance.naver.com) ETF basic API (dividendYieldTtm) |
 
 - 갱신: GitHub Actions 매시간 자동 실행 (`.github/workflows/update.yml`)
-- 저장: `data/stocks.json` (약 130개 티커)
+- 저장: `data/stocks.json` (약 160개 티커)
 - 기간: 5년치 일봉 다운로드, 5년 이상은 주봉 다운샘플
 
 ## 요구사항

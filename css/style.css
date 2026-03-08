@@ -378,8 +378,8 @@ body {
 }
 
 /* Column Widths */
-.col-name   { width: 165px; min-width: 105px; max-width: 165px; }
-.col-ticker { width: 60px; min-width: 60px; }
+.col-name   { width: 175px; min-width: 115px; max-width: 175px; }
+.col-ticker { width: 52px; min-width: 52px; }
 .col-price  { min-width: 90px; }
 .col-pct    { min-width: 74px; }
 .col-year   { min-width: 74px; }

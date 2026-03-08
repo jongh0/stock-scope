@@ -185,7 +185,7 @@ class StockScope {
             <thead>
               <tr>
                 <th class="col-name">종목명</th>
-                <th class="col-ticker">티커</th>
+                <th class="col-ticker">${['kr-top20','kr-etf'].includes(groupId) ? '종목코드' : '티커'}</th>
                 <th class="col-price" data-col="price">현재가 ${sortArrow('price')}</th>
                 <th class="col-pct" data-col="change_pct">일간(%) ${sortArrow('change_pct')}</th>
                 <th class="col-pct col-week" data-col="week_pct">주간(%) ${sortArrow('week_pct')}</th>

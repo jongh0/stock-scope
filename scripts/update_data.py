@@ -45,6 +45,8 @@ STOCKS = {
     "VIG":       {"name": "배당성장 10년",      "currency": "USD"},
     "SCHD":      {"name": "배당우량",       "currency": "USD"},
     "SPYD":      {"name": "고배당",         "currency": "USD"},
+    "JEPI":      {"name": "JP모건 커버드콜", "currency": "USD"},
+    "JEPQ":      {"name": "나스닥 커버드콜", "currency": "USD"},
     # 섹터 ETF
     "XLK":       {"name": "기술섹터",           "currency": "USD"},
     "XLV":       {"name": "헬스케어섹터",       "currency": "USD"},
@@ -73,6 +75,7 @@ STOCKS = {
     "TLT":       {"name": "장기국채",       "currency": "USD"},
     "AGG":       {"name": "채권종합",       "currency": "USD"},
     "HYG":       {"name": "하이일드채권",   "currency": "USD"},
+    "BIL":       {"name": "단기국채",       "currency": "USD"},
     # 원자재
     "GLD":       {"name": "금",             "currency": "USD"},
     "SLV":       {"name": "은",             "currency": "USD"},
@@ -81,12 +84,17 @@ STOCKS = {
     "UNG":       {"name": "천연가스",       "currency": "USD"},
     "DBC":       {"name": "원자재종합",     "currency": "USD"},
     "DBA":       {"name": "농산물",         "currency": "USD"},
+    "PPLT":      {"name": "백금",           "currency": "USD"},
+    "WEAT":      {"name": "밀",             "currency": "USD"},
     # 지역 ETF
     "VGK":       {"name": "유럽",           "currency": "USD"},
     "EWJ":       {"name": "일본",           "currency": "USD"},
     "EEM":       {"name": "신흥국",         "currency": "USD"},
     "MCHI":      {"name": "중국",           "currency": "USD"},
     "EWZ":       {"name": "브라질",         "currency": "USD"},
+    "INDA":      {"name": "인도",           "currency": "USD"},
+    "EWY":       {"name": "한국",           "currency": "USD"},
+    "EWT":       {"name": "대만",           "currency": "USD"},
     # 빅테크
     "AAPL":      {"name": "애플",               "currency": "USD"},
     "MSFT":      {"name": "마이크로소프트",      "currency": "USD"},
@@ -102,26 +110,46 @@ STOCKS = {
     "INTC":      {"name": "인텔",               "currency": "USD"},
     "QCOM":      {"name": "퀄컴",               "currency": "USD"},
     "AVGO":      {"name": "브로드컴",           "currency": "USD"},
+    "MU":        {"name": "마이크론",           "currency": "USD"},
+    "ARM":       {"name": "ARM홀딩스",          "currency": "USD"},
+    "AMAT":      {"name": "어플라이드머티리얼즈", "currency": "USD"},
+    "LRCX":      {"name": "램리서치",           "currency": "USD"},
     # 결제/금융
     "JPM":       {"name": "JP모건",             "currency": "USD"},
     "V":         {"name": "비자",               "currency": "USD"},
     "MA":        {"name": "마스터카드",         "currency": "USD"},
     "PYPL":      {"name": "페이팔",             "currency": "USD"},
     "BAC":       {"name": "BOA",                "currency": "USD"},
+    "GS":        {"name": "골드만삭스",         "currency": "USD"},
+    "MS":        {"name": "모건스탠리",         "currency": "USD"},
+    "AXP":       {"name": "아메리칸익스프레스", "currency": "USD"},
+    "SCHW":      {"name": "찰스슈왑",           "currency": "USD"},
+    "XYZ":       {"name": "블록",               "currency": "USD"},
     # 자동차/EV
     "F":         {"name": "포드",               "currency": "USD"},
     "GM":        {"name": "GM",                 "currency": "USD"},
     "RIVN":      {"name": "리비안",             "currency": "USD"},
+    "TM":        {"name": "토요타",             "currency": "USD"},
+    "LCID":      {"name": "루시드",             "currency": "USD"},
+    "NIO":       {"name": "니오",               "currency": "USD"},
     # 미디어/통신
     "NFLX":      {"name": "넷플릭스",           "currency": "USD"},
     "DIS":       {"name": "디즈니",             "currency": "USD"},
     "VZ":        {"name": "버라이즌",           "currency": "USD"},
     "T":         {"name": "AT&T",               "currency": "USD"},
+    "SPOT":      {"name": "스포티파이",         "currency": "USD"},
+    "ROKU":      {"name": "로쿠",               "currency": "USD"},
+    "TMUS":      {"name": "T모바일",            "currency": "USD"},
     # SW/클라우드
     "ADBE":      {"name": "어도비",             "currency": "USD"},
     "CRM":       {"name": "세일즈포스",         "currency": "USD"},
     "ADSK":      {"name": "오토데스크",         "currency": "USD"},
     "PLTR":      {"name": "팔란티어",           "currency": "USD"},
+    "SNOW":      {"name": "스노우플레이크",     "currency": "USD"},
+    "NOW":       {"name": "서비스나우",         "currency": "USD"},
+    "SHOP":      {"name": "쇼피파이",           "currency": "USD"},
+    "NET":       {"name": "클라우드플레어",     "currency": "USD"},
+    "DDOG":      {"name": "데이터독",           "currency": "USD"},
     # 유통/소비재
     "WMT":       {"name": "월마트",             "currency": "USD"},
     "COST":      {"name": "코스트코",           "currency": "USD"},
@@ -130,11 +158,20 @@ STOCKS = {
     "NKE":       {"name": "나이키",             "currency": "USD"},
     "SBUX":      {"name": "스타벅스",           "currency": "USD"},
     "KO":        {"name": "코카콜라",           "currency": "USD"},
+    "TGT":       {"name": "타겟",               "currency": "USD"},
+    "PG":        {"name": "P&G",                "currency": "USD"},
+    "PM":        {"name": "필립모리스",         "currency": "USD"},
+    "LULU":      {"name": "룰루레몬",           "currency": "USD"},
     # 헬스케어
     "UNH":       {"name": "유나이티드헬스",     "currency": "USD"},
     "JNJ":       {"name": "존슨앤존슨",         "currency": "USD"},
     "PFE":       {"name": "화이자",             "currency": "USD"},
     "LLY":       {"name": "일라이릴리",         "currency": "USD"},
+    "ABBV":      {"name": "애브비",             "currency": "USD"},
+    "MRK":       {"name": "머크",               "currency": "USD"},
+    "AMGN":      {"name": "암젠",               "currency": "USD"},
+    "ISRG":      {"name": "인튜이티브서지컬",   "currency": "USD"},
+    "DXCM":      {"name": "덱스콤",             "currency": "USD"},
     # 기타 대형주
     "BRK-B":     {"name": "버크셔해서웨이",     "currency": "USD"},
     "ORCL":      {"name": "오라클",             "currency": "USD"},
@@ -182,14 +219,20 @@ STOCKS = {
 
 ALL_TICKERS = list(STOCKS.keys())
 
-# PER이 의미 없는 티커 (채권·원자재·크립토 ETF)
+# PER이 의미 없는 티커 (채권·원자재·크립토·배당·지역 ETF)
 NO_PER_TICKERS = {
     # 채권
-    "TLT", "AGG", "HYG", "273130.KS",
+    "TLT", "AGG", "HYG", "BIL", "273130.KS",
     # 원자재
-    "GLD", "SLV", "CPER", "USO", "UNG", "DBC", "DBA",
-    # 크립토 ETF (현물 보유, 이익 없음)
+    "GLD", "SLV", "CPER", "USO", "UNG", "DBC", "DBA", "PPLT", "WEAT",
+    # 크립토 ETF
     "IBIT", "FBTC", "ETHA", "BITQ",
+    # 배당·커버드콜 ETF
+    "DGRO", "VIG", "SCHD", "SPYD", "JEPI", "JEPQ",
+    # 지역 ETF
+    "VGK", "EWJ", "EEM", "MCHI", "EWZ", "INDA", "EWY", "EWT",
+    # 섹터 ETF
+    "XLK", "XLV", "XLY", "XLP", "XLF", "XLI", "XLU", "XLB", "XLE", "XLC",
 }
 
 
