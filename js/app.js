@@ -255,7 +255,7 @@ class StockScope {
     return `
       <tr class="stock-row" data-ticker="${s.ticker}">
         <td class="col-name">
-          <span class="stock-name">${s.name}</span><span class="mobile-ticker">${s.ticker}</span>
+          <span class="stock-name">${s.name}</span>${s.ticker.endsWith('.KS') ? '' : `<span class="mobile-ticker">${s.ticker}</span>`}
         </td>
         <td class="col-ticker">
           <a href="${yahooUrl}" target="_blank" class="ticker-link">${s.ticker}</a>
