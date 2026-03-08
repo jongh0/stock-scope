@@ -614,24 +614,19 @@ body {
   .stock-row td.col-week { grid-column: 1; grid-row: 2; display: flex !important; align-items: center; gap: 4px; }
   .stock-row td.col-mdd  { grid-column: 2; grid-row: 2; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
 
-  /* 행 3: RSI (왼쪽) | MACD (가운데서부터) */
-  .stock-row td.col-rsi  { grid-column: 1; grid-row: 3; display: flex !important; align-items: center; gap: 4px; }
-  .stock-row td.col-macd { grid-column: 2; grid-row: 3; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
+  /* 행 3: 배당률 (왼쪽) | PER (오른쪽) */
+  .stock-row td.col-div { grid-column: 1; grid-row: 3; display: flex !important; align-items: center; gap: 4px; }
+  .stock-row td.col-per { grid-column: 2; grid-row: 3; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
 
-  .stock-row td.col-rsi .indicator-chart,
-  .stock-row td.col-macd .indicator-chart { display: none; }
-  .stock-row td.col-rsi .indicator-cell,
-  .stock-row td.col-macd .indicator-cell { display: contents; }
+  /* RSI·MACD 모바일 숨김 */
+  .stock-row td.col-rsi  { display: none !important; }
+  .stock-row td.col-macd { display: none !important; }
 
   /* 항목 라벨 */
   .stock-row td.col-week::before { content: '주간';  font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-mdd::before  { content: 'MDD';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
-  .stock-row td.col-rsi::before  { content: 'RSI';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
-  .stock-row td.col-macd::before { content: 'MACD';  font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
-
-  /* PER·배당률 모바일 숨김 */
-  .stock-row td.col-per { display: none !important; }
-  .stock-row td.col-div { display: none !important; }
+  .stock-row td.col-div::before  { content: '배당률'; font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+  .stock-row td.col-per::before  { content: 'PER';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
 
   /* 행 4: 1년 + 5년 차트 (2열), 30일 숨김 */
   /* PER·배당률 컬럼 추가로 30일=11, 1년=12, 5년=13 */
