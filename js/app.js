@@ -18,6 +18,7 @@ class StockScope {
   async _init() {
     this._buildGroupNav();
     this._bindTheme();
+    this._bindHelp();
     this._bindSwipe();
     await this._loadData();
   }
@@ -188,9 +189,10 @@ class StockScope {
                 <th class="col-ticker">${['kr-top20','kr-etf'].includes(groupId) ? '종목코드' : '티커'}</th>
                 <th class="col-price" data-col="price">현재가 ${sortArrow('price')}</th>
                 <th class="col-pct" data-col="change_pct">일간(%) ${sortArrow('change_pct')}</th>
-                <th class="col-pct col-week" data-col="week_pct">주간(%) ${sortArrow('week_pct')}</th>
                 <th class="col-pct col-year" data-col="year_pct">연간(%) ${sortArrow('year_pct')}</th>
                 <th class="col-mdd" data-col="mdd_52w">MDD ${sortArrow('mdd_52w')}</th>
+                <th class="col-beta" data-col="beta">베타 ${sortArrow('beta')}</th>
+                <th class="col-sharpe" data-col="sharpe">샤프 ${sortArrow('sharpe')}</th>
                 <th class="col-per" data-col="per">PER ${sortArrow('per')}</th>
                 <th class="col-div" data-col="div_yield">배당률 ${sortArrow('div_yield')}</th>
                 <th class="col-rsi" data-col="rsi">RSI(14) ${sortArrow('rsi')}</th>
@@ -223,10 +225,6 @@ class StockScope {
     const dayPct  = this._fmtPct(s.change_pct);
     const dayCls  = this._pctClass(s.change_pct);
 
-    // 주간 수익률
-    const weekPct = this._fmtPct(s.week_pct);
-    const weekCls = this._pctClass(s.week_pct);
-
     // 연간 수익률
     const yearPct = this._fmtPct(s.year_pct);
     const yearCls = this._pctClass(s.year_pct);
@@ -234,6 +232,12 @@ class StockScope {
     // MDD (52w 고점 대비)
     const mddStr  = this._fmtPct(s.mdd_52w);
     const mddCls  = this._mddClass(s.mdd_52w);
+
+    // Beta / Sharpe
+    const betaStr   = s.beta   != null ? s.beta.toFixed(2)   : '-';
+    const sharpeStr = s.sharpe != null ? s.sharpe.toFixed(2) : '-';
+    const betaCls   = this._betaClass(s.beta);
+    const sharpeCls = this._sharpeClass(s.sharpe);
 
     // PER
     const perStr = s.per != null ? s.per.toFixed(1) : '-';
@@ -285,11 +289,12 @@ class StockScope {
         </td>
         <td class="col-price">${priceStr}<span class="mobile-change ${dayCls}">${dayPct}</span></td>
         <td class="col-pct ${dayCls}">${dayPct}</td>
-        <td class="col-pct col-week ${weekCls}">${weekPct}</td>
         <td class="col-pct col-year ${yearCls}">${yearPct}</td>
         <td class="col-mdd">
           <span class="mdd-badge ${mddCls}">${mddStr}</span>
         </td>
+        <td class="col-beta"><span class="beta-badge ${betaCls}">${betaStr}</span></td>
+        <td class="col-sharpe"><span class="sharpe-badge ${sharpeCls}">${sharpeStr}</span></td>
         <td class="col-per">${perStr}</td>
         <td class="col-div">${divStr}</td>
         <td class="col-rsi">
@@ -362,6 +367,54 @@ class StockScope {
     // hist < 0 && !up  → 약세 강화
     if (hist > 0) return up ? 'macd-bull-strong' : 'macd-bull-weak';
     return up ? 'macd-bear-weak' : 'macd-bear-strong';
+  }
+
+  _betaClass(v) {
+    if (v == null) return '';
+    if (v < 0)    return 'beta-inverse';
+    if (v < 0.8)  return 'beta-low';
+    if (v <= 1.2) return '';
+    if (v <= 1.8) return 'beta-high';
+    return 'beta-extreme';
+  }
+
+  _sharpeClass(v) {
+    if (v == null) return '';
+    if (v < 0)    return 'sharpe-neg';
+    if (v < 0.5)  return '';
+    if (v < 1.0)  return 'sharpe-ok';
+    return 'sharpe-good';
+  }
+
+  /* ── 지표 설명 모달 ─────────────────────────────────────── */
+  _bindHelp() {
+    const modal = document.getElementById('metricsModal');
+
+    document.getElementById('helpBtn').addEventListener('click', () => {
+      modal.hidden = false;
+    });
+
+    document.getElementById('modalClose').addEventListener('click', () => {
+      modal.hidden = true;
+    });
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.hidden = true;
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !modal.hidden) modal.hidden = true;
+    });
+
+    modal.querySelectorAll('.metric-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        modal.querySelectorAll('.metric-tab').forEach(t => t.classList.remove('active'));
+        modal.querySelectorAll('.metric-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        modal.querySelector(`.metric-panel[data-metric="${tab.dataset.metric}"]`)
+             .classList.add('active');
+      });
+    });
   }
 }
 

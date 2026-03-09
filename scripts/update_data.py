@@ -32,6 +32,8 @@ KST = timezone(timedelta(hours=9))
 NOW = datetime.now(KST)
 TODAY = NOW.strftime("%Y-%m-%dT%H:%M:00")
 
+RISK_FREE_RATE = 4.5  # 연간 무위험 수익률 (%) — 미국 단기채 기준
+
 # 모든 티커 + 종목명 + 통화
 # NOTE: TOP 20 category in js/config.js uses US-listed market-cap ranking.
 STOCKS = {
@@ -346,6 +348,15 @@ def fetch_all():
     naver_data = fetch_naver_bulk(kr_codes)
     print(f"  [Naver] {len(naver_data)}/{len(kr_codes)}개 KR 종목 데이터 취득")
 
+    # S&P500 벤치마크 다운로드 (미국 ETF 베타 계산용)
+    print("  [Beta] ^GSPC (S&P500) 벤치마크 다운로드 중...")
+    try:
+        gspc_raw = yf.download("^GSPC", period="2y", auto_adjust=True, progress=False)
+        gspc_hist = gspc_raw["Close"].squeeze().dropna()
+    except Exception as e:
+        print(f"  [Beta] ^GSPC 다운로드 실패: {e}")
+        gspc_hist = None
+
     for ticker in ALL_TICKERS:
         meta = STOCKS[ticker]
         try:
@@ -369,17 +380,20 @@ def fetch_all():
             # 일간 수익률
             change_pct = (price - prev_close) / prev_close * 100
 
-            # 주간 수익률 (5 거래일 전)
-            idx_5 = max(0, len(hist) - 6)
-            price_5d = float(hist.iloc[idx_5])
-            week_pct = (price - price_5d) / price_5d * 100
-
             # 52주 고점 & MDD & 연간 수익률
             hist_1y = hist.iloc[-252:]
             high_52w = float(hist_1y.max())
             mdd_52w  = (price - high_52w) / high_52w * 100
             price_1y = float(hist_1y.iloc[0])
             year_pct = (price - price_1y) / price_1y * 100
+
+            # 샤프 지수 (1년 기준)
+            if len(hist) >= 30:
+                daily_rets = hist.pct_change().dropna().iloc[-252:]
+                annual_vol = daily_rets.std() * np.sqrt(252) * 100  # %로 변환
+                sharpe = round((year_pct - RISK_FREE_RATE) / annual_vol, 2) if annual_vol > 0 else None
+            else:
+                sharpe = None
 
             # RSI
             rsi_series = calc_rsi(hist)
@@ -420,19 +434,38 @@ def fetch_all():
                 per, div_yield = naver_data.get(code6, (None, None))
                 if ticker in NO_PER_TICKERS:
                     per = None
+                beta = None
             else:
                 # 미국 종목 → yfinance
                 try:
                     info = yf.Ticker(ticker).info
                     div_rate = info.get('trailingAnnualDividendRate') or 0
                     div_yield = round(float(div_rate) / price * 100, 2) if div_rate and price else None
+                    if div_yield is None:
+                        # ETF 분배율은 dividendYield 필드(이미 % 단위)에 있음
+                        dy = info.get('dividendYield')
+                        div_yield = round(float(dy), 2) if dy else None
                     if div_yield and div_yield > 25:  # 25% 초과는 데이터 오류로 처리
                         div_yield = None
                     pe = info.get('trailingPE')
                     per = round(float(pe), 1) if pe and ticker not in NO_PER_TICKERS else None
+                    b = info.get('beta')
+                    beta = round(float(b), 2) if b is not None else None
+                    # yfinance beta가 None인 경우(주로 ETF) → S&P500 대비 직접 계산
+                    if beta is None and gspc_hist is not None and len(hist) >= 100:
+                        try:
+                            stock_rets = hist.iloc[-252:].pct_change().dropna()
+                            bench_rets = gspc_hist.pct_change().dropna()
+                            aligned = stock_rets.index.intersection(bench_rets.index)
+                            sr, br = stock_rets[aligned], bench_rets[aligned]
+                            if len(sr) >= 100:
+                                beta = round(float(np.cov(sr, br)[0, 1] / np.var(br, ddof=1)), 2)
+                        except Exception:
+                            pass
                 except Exception:
                     div_yield = None
                     per = None
+                    beta = None
 
             # 200일 이평선
             ma200_full = hist.rolling(200).mean()
@@ -447,9 +480,10 @@ def fetch_all():
                 "currency":   meta["currency"],
                 "price":      round(price, 2),
                 "change_pct": round(change_pct, 2),
-                "week_pct":   round(week_pct, 2),
                 "year_pct":   round(year_pct, 2),
                 "mdd_52w":    round(mdd_52w, 2),
+                "beta":       beta,
+                "sharpe":     sharpe,
                 "per":        per,
                 "div_yield":  div_yield,
                 "rsi":        round(rsi, 1) if rsi is not None else None,

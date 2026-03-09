@@ -22,6 +22,14 @@
     </div>
     <div class="header-right">
       <span class="updated-label" id="updatedLabel">업데이트 로딩중...</span>
+      <button id="helpBtn" class="theme-btn" title="지표 설명">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </button>
       <button class="theme-btn" id="themeBtn"></button>
     </div>
   </header>
@@ -50,6 +58,122 @@
     &nbsp;·&nbsp; <a href="https://finance.naver.com" target="_blank">네이버 금융</a>
     &nbsp;|&nbsp; <a href="https://github.com/jongh0/stock-scope" target="_blank">GitHub</a>
   </footer>
+
+  <!-- 지표 설명 모달 -->
+  <div id="metricsModal" class="modal-overlay" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">지표 안내</h2>
+        <button id="modalClose" class="modal-close theme-btn" aria-label="닫기">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <nav class="metric-tabs" role="tablist">
+          <button class="metric-tab active" role="tab" data-metric="mdd">MDD</button>
+          <button class="metric-tab" role="tab" data-metric="beta">베타</button>
+          <button class="metric-tab" role="tab" data-metric="sharpe">샤프</button>
+          <button class="metric-tab" role="tab" data-metric="per">PER</button>
+          <button class="metric-tab" role="tab" data-metric="rsi">RSI</button>
+          <button class="metric-tab" role="tab" data-metric="macd">MACD</button>
+        </nav>
+        <div class="metric-content-area">
+
+          <!-- MDD -->
+          <div class="metric-panel active" data-metric="mdd">
+            <h3>MDD <span class="metric-subtitle-inline">최대 낙폭</span></h3>
+            <p class="metric-subtitle">52주 고점 대비 현재 가격의 하락 비율입니다.</p>
+            <div class="metric-section-title">계산 방식</div>
+            <div class="metric-formula">(현재가 − 52주 최고가) ÷ 52주 최고가 × 100</div>
+            <div class="metric-section-title">읽는 법</div>
+            <div class="level-list">
+              <div class="level-item"><span class="level-chip" style="background:#22c55e"></span>0 ~ −5% : 양호 — 고점 근처 유지</div>
+              <div class="level-item"><span class="level-chip" style="background:#f59e0b"></span>−5 ~ −10% : 경미 — 단기 조정 수준</div>
+              <div class="level-item"><span class="level-chip" style="background:#f97316"></span>−10 ~ −20% : 중간 — 중기 하락 주의</div>
+              <div class="level-item"><span class="level-chip" style="background:#ef4444"></span>−20 ~ −30% : 심각 — 추세 하락 가능성</div>
+              <div class="level-item"><span class="level-chip" style="background:#7f1d1d"></span>−30% 미만 : 위험 — 장기 하락장</div>
+            </div>
+          </div>
+
+          <!-- 베타 -->
+          <div class="metric-panel" data-metric="beta">
+            <h3>베타 <span class="metric-subtitle-inline">시장 민감도</span></h3>
+            <p class="metric-subtitle">S&amp;P500 대비 가격 변동성의 상대적 크기입니다. 3년 주간 수익률로 계산됩니다.</p>
+            <div class="metric-section-title">계산 방식</div>
+            <div class="metric-formula">Cov(종목 수익률, S&P500 수익률) ÷ Var(S&P500 수익률)</div>
+            <div class="metric-section-title">읽는 법</div>
+            <div class="level-list">
+              <div class="level-item"><span class="level-chip" style="background:#3b82f6"></span>β &lt; 0.8 : 방어적 — 시장보다 덜 움직임</div>
+              <div class="level-item"><span class="level-chip" style="background:#22c55e"></span>0.8 ~ 1.2 : 중립 — 시장과 유사한 움직임</div>
+              <div class="level-item"><span class="level-chip" style="background:#f97316"></span>β &gt; 1.2 : 공격적 — 시장보다 더 크게 움직임</div>
+              <div class="level-item"><span class="level-chip" style="background:#94a3b8"></span>β &lt; 0 : 역방향 — 시장과 반대로 움직임</div>
+            </div>
+          </div>
+
+          <!-- 샤프 -->
+          <div class="metric-panel" data-metric="sharpe">
+            <h3>샤프 지수 <span class="metric-subtitle-inline">위험 조정 수익률</span></h3>
+            <p class="metric-subtitle">위험 1단위당 얼마나 많은 초과 수익을 냈는지 나타냅니다. 1년 일간 수익률 기준입니다.</p>
+            <div class="metric-section-title">계산 방식</div>
+            <div class="metric-formula">(연환산 수익률 − 무위험 이자율) ÷ 연환산 변동성</div>
+            <div class="metric-section-title">읽는 법</div>
+            <div class="level-list">
+              <div class="level-item"><span class="level-chip" style="background:#22c55e"></span>1.0 이상 : 우수 — 위험 대비 수익이 좋음</div>
+              <div class="level-item"><span class="level-chip" style="background:#f59e0b"></span>0 ~ 1.0 : 보통 — 수익은 있으나 효율 낮음</div>
+              <div class="level-item"><span class="level-chip" style="background:#ef4444"></span>0 미만 : 부진 — 위험 대비 손실 발생</div>
+            </div>
+          </div>
+
+          <!-- PER -->
+          <div class="metric-panel" data-metric="per">
+            <h3>PER <span class="metric-subtitle-inline">주가수익비율</span></h3>
+            <p class="metric-subtitle">현재 주가가 주당순이익(EPS)의 몇 배인지 나타냅니다. Yahoo Finance TTM 기준입니다.</p>
+            <div class="metric-section-title">계산 방식</div>
+            <div class="metric-formula">주가 ÷ 주당순이익(TTM)</div>
+            <div class="metric-section-title">읽는 법</div>
+            <div class="level-list">
+              <div class="level-item"><span class="level-chip" style="background:#22c55e"></span>낮을수록 상대적 저평가 가능성 (업종 평균 비교 필요)</div>
+              <div class="level-item"><span class="level-chip" style="background:#f59e0b"></span>높을수록 고성장 기대 또는 고평가 가능성</div>
+              <div class="level-item"><span class="level-chip" style="background:#94a3b8"></span>— 표시: ETF · 리츠 · 적자 기업은 산출 불가</div>
+            </div>
+          </div>
+
+          <!-- RSI -->
+          <div class="metric-panel" data-metric="rsi">
+            <h3>RSI <span class="metric-subtitle-inline">상대강도지수</span></h3>
+            <p class="metric-subtitle">최근 14일 동안의 상승/하락 비율로 계산된 0~100 사이의 지수입니다.</p>
+            <div class="metric-section-title">계산 방식</div>
+            <div class="metric-formula">100 − 100 ÷ (1 + 평균상승폭 ÷ 평균하락폭)</div>
+            <div class="metric-section-title">읽는 법</div>
+            <div class="level-list">
+              <div class="level-item"><span class="level-chip" style="background:#ef4444"></span>70 이상 : 과매수 — 단기 조정 가능성</div>
+              <div class="level-item"><span class="level-chip" style="background:#94a3b8"></span>30 ~ 70 : 중립 — 정상 범위</div>
+              <div class="level-item"><span class="level-chip" style="background:#3b82f6"></span>30 이하 : 과매도 — 반등 기대 가능</div>
+            </div>
+          </div>
+
+          <!-- MACD -->
+          <div class="metric-panel" data-metric="macd">
+            <h3>MACD <span class="metric-subtitle-inline">이동평균 수렴·발산</span></h3>
+            <p class="metric-subtitle">단기(12일)와 장기(26일) 지수이동평균의 차이로 추세 방향과 강도를 나타냅니다.</p>
+            <div class="metric-section-title">계산 방식</div>
+            <div class="metric-formula">MACD = EMA(12) − EMA(26) &nbsp;|&nbsp; 히스토그램 = MACD − Signal(9)</div>
+            <div class="metric-section-title">읽는 법</div>
+            <div class="level-list">
+              <div class="level-item"><span class="level-chip" style="background:#22c55e"></span>히스토그램 양수 + 상승 : 강한 매수세</div>
+              <div class="level-item"><span class="level-chip" style="background:#86efac"></span>히스토그램 양수 + 하락 : 매수세 약화</div>
+              <div class="level-item"><span class="level-chip" style="background:#fca5a5"></span>히스토그램 음수 + 상승 : 매도세 약화</div>
+              <div class="level-item"><span class="level-chip" style="background:#ef4444"></span>히스토그램 음수 + 하락 : 강한 매도세</div>
+            </div>
+          </div>
+
+        </div><!-- /.metric-content-area -->
+      </div><!-- /.modal-body -->
+    </div><!-- /.modal-box -->
+  </div><!-- /#metricsModal -->
 
   <script src="js/config.js"></script>
   <script src="js/sparkline.js"></script>
