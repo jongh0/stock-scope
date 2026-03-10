@@ -189,7 +189,8 @@ class StockScope {
                 <th class="col-ticker">${['kr-top20','kr-etf'].includes(groupId) ? '종목코드' : '티커'}</th>
                 <th class="col-price" data-col="price">현재가 ${sortArrow('price')}</th>
                 <th class="col-pct" data-col="change_pct">일간(%) ${sortArrow('change_pct')}</th>
-                <th class="col-pct col-year" data-col="year_pct">연간(%) ${sortArrow('year_pct')}</th>
+                <th class="col-pct col-ytd" data-col="ytd_pct">YTD ${sortArrow('ytd_pct')}</th>
+                <th class="col-pct col-year" data-col="year_pct">YoY ${sortArrow('year_pct')}</th>
                 <th class="col-mdd" data-col="mdd_52w">MDD ${sortArrow('mdd_52w')}</th>
                 <th class="col-beta" data-col="beta">베타 ${sortArrow('beta')}</th>
                 <th class="col-sharpe" data-col="sharpe">샤프 ${sortArrow('sharpe')}</th>
@@ -225,9 +226,13 @@ class StockScope {
     const dayPct  = this._fmtPct(s.change_pct);
     const dayCls  = this._pctClass(s.change_pct);
 
-    // 연간 수익률
+    // YoY (1년 전 대비 수익률)
     const yearPct = this._fmtPct(s.year_pct);
     const yearCls = this._pctClass(s.year_pct);
+
+    // YTD (연초 대비 수익률)
+    const ytdPct = this._fmtPct(s.ytd_pct);
+    const ytdCls = this._pctClass(s.ytd_pct);
 
     // MDD (52w 고점 대비)
     const mddStr  = this._fmtPct(s.mdd_52w);
@@ -289,6 +294,7 @@ class StockScope {
         </td>
         <td class="col-price">${priceStr}<span class="mobile-change ${dayCls}">${dayPct}</span></td>
         <td class="col-pct ${dayCls}">${dayPct}</td>
+        <td class="col-pct col-ytd ${ytdCls}">${ytdPct}</td>
         <td class="col-pct col-year ${yearCls}">${yearPct}</td>
         <td class="col-mdd">
           <span class="mdd-badge ${mddCls}">${mddStr}</span>

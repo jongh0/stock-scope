@@ -383,6 +383,7 @@ body {
 .col-price  { min-width: 90px; }
 .col-pct    { min-width: 74px; }
 .col-year   { min-width: 74px; }
+.col-ytd    { min-width: 74px; }
 .col-mdd    { min-width: 78px; }
 .col-beta   { min-width: 60px; color: var(--text-muted); }
 .col-sharpe { min-width: 64px; color: var(--text-muted); }
@@ -689,7 +690,7 @@ body {
     z-index: auto;
   }
 
-  /* Mobile Row 1 Layout */
+  /* Mobile Row 1 Layout (1안: 종목명 | YTD) */
   .stock-row td.col-name {
     grid-column: 1;
     grid-row: 1;
@@ -699,6 +700,14 @@ body {
     font-size: 13px;
     font-weight: 700;
     color: var(--text);
+  }
+
+  .stock-row td.col-ytd {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
   }
 
   .mobile-ticker {
@@ -711,8 +720,8 @@ body {
   .stock-row td.col-ticker { display: none !important; }
 
   .stock-row td.col-price {
-    grid-column: 2;
-    grid-row: 1;
+    grid-column: 1;
+    grid-row: 2;
     display: flex !important;
     align-items: baseline;
     justify-content: flex-start;
@@ -731,14 +740,14 @@ body {
   .stock-row td.col-beta   { display: none !important; }
   .stock-row td.col-per    { display: none !important; }
   .stock-row td.col-sharpe { display: none !important; }
+  .stock-row td.col-div    { display: none !important; }
 
-  /* Mobile Row 2 Layout */
-  .stock-row td.col-year { grid-column: 1; grid-row: 2; display: flex !important; align-items: center; gap: 4px; }
-  .stock-row td.col-mdd  { grid-column: 2; grid-row: 2; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
+  /* Mobile Row 2 Layout (현재가 | YoY) */
+  .stock-row td.col-year { grid-column: 2; grid-row: 2; display: flex !important; align-items: center; gap: 4px; }
+  .stock-row td.col-mdd  { grid-column: 2; grid-row: 3; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
 
-  /* Mobile Row 3 Layout */
-  .stock-row td.col-div { grid-column: 1; grid-row: 3; display: flex !important; align-items: center; gap: 4px; }
-  .stock-row td.col-rsi { grid-column: 2; grid-row: 3; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
+  /* Mobile Row 3 Layout (RSI | MDD) */
+  .stock-row td.col-rsi { grid-column: 1; grid-row: 3; display: flex !important; justify-content: flex-start; align-items: center; gap: 4px; }
 
   /* Hide MACD on Mobile */
   .stock-row td.col-macd { display: none !important; }
@@ -747,17 +756,17 @@ body {
   .stock-row td.col-rsi .indicator-cell svg { display: none; }
 
   /* Mobile Field Labels */
-  .stock-row td.col-year::before { content: '연간';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+  .stock-row td.col-ytd::before { content: 'YTD';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+  .stock-row td.col-year::before { content: 'YoY';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-mdd::before  { content: 'MDD';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
-  .stock-row td.col-div::before  { content: '배당률'; font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-rsi::before  { content: 'RSI';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
 
-  /* Mobile Chart Section (13=30일, 14=1년, 15=5년) */
+  /* Mobile Chart Section (14=30일, 15=1년, 16=5년) */
   /* Hide 5Y Chart on Mobile */
-  .stock-row td:nth-child(15) { display: none !important; }
+  .stock-row td:nth-child(16) { display: none !important; }
 
-  .stock-row td:nth-child(13),
-  .stock-row td:nth-child(14) {
+  .stock-row td:nth-child(14),
+  .stock-row td:nth-child(15) {
     grid-row: 4;
     min-width: 0;
     display: flex !important;
@@ -769,14 +778,14 @@ body {
     border-top: 1px solid var(--border);
   }
 
-  .stock-row td:nth-child(13) { grid-column: 1; }
-  .stock-row td:nth-child(14) { grid-column: 2; }
+  .stock-row td:nth-child(14) { grid-column: 1; }
+  .stock-row td:nth-child(15) { grid-column: 2; }
 
-  .stock-row td:nth-child(13)::before { content: '30일'; font-size: 10px; color: var(--text-muted); }
-  .stock-row td:nth-child(14)::before { content: '1년'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(14)::before { content: '30일'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(15)::before { content: '1년'; font-size: 10px; color: var(--text-muted); }
 
-  .stock-row td:nth-child(12) .sparkline,
-  .stock-row td:nth-child(13) .sparkline {
+  .stock-row td:nth-child(14) .sparkline,
+  .stock-row td:nth-child(15) .sparkline {
     height: 20px;
     min-width: 0;
     width: 100%;

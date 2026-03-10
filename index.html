@@ -63,7 +63,7 @@
   <div id="metricsModal" class="modal-overlay" hidden>
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-header">
-        <h2 class="modal-title" id="modalTitle">지표 안내</h2>
+        <h2 class="modal-title" id="modalTitle">지표 설명</h2>
         <button id="modalClose" class="modal-close theme-btn" aria-label="닫기">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -73,7 +73,9 @@
       </div>
       <div class="modal-body">
         <nav class="metric-tabs" role="tablist">
-          <button class="metric-tab active" role="tab" data-metric="mdd">MDD</button>
+          <button class="metric-tab active" role="tab" data-metric="ytd">YTD</button>
+          <button class="metric-tab" role="tab" data-metric="yoy">YoY</button>
+          <button class="metric-tab" role="tab" data-metric="mdd">MDD</button>
           <button class="metric-tab" role="tab" data-metric="beta">베타</button>
           <button class="metric-tab" role="tab" data-metric="sharpe">샤프</button>
           <button class="metric-tab" role="tab" data-metric="per">PER</button>
@@ -82,8 +84,35 @@
         </nav>
         <div class="metric-content-area">
 
+          <!-- YTD -->
+          <div class="metric-panel active" data-metric="ytd">
+            <h3>YTD <span class="metric-subtitle-inline">연초 대비 수익률</span></h3>
+            <p class="metric-subtitle">해당 연도 첫 거래일 종가 대비 현재가의 변동률(%)입니다.</p>
+            <div class="metric-section-title">계산 방식</div>
+            <div class="metric-formula">(현재가 − 연초 첫 거래일 종가) ÷ 연초 첫 거래일 종가 × 100</div>
+            <div class="metric-section-title">읽는 법</div>
+            <div class="level-list">
+              <div class="level-item"><span class="level-chip" style="background:#22c55e"></span>양수 : 올해 들어 상승 — 연초 대비 수익</div>
+              <div class="level-item"><span class="level-chip" style="background:#ef4444"></span>음수 : 올해 들어 하락 — 연초 대비 손실</div>
+            </div>
+          </div>
+
+          <!-- YoY -->
+          <div class="metric-panel" data-metric="yoy">
+            <h3>YoY <span class="metric-subtitle-inline">1년 전 대비 수익률</span></h3>
+            <p class="metric-subtitle">1년 전(약 252 거래일 전) 종가 대비 현재가의 변동률(%)입니다.</p>
+            <div class="metric-section-title">계산 방식</div>
+            <div class="metric-formula">(현재가 − 1년 전 종가) ÷ 1년 전 종가 × 100</div>
+            <div class="metric-section-title">읽는 법</div>
+            <div class="level-list">
+              <div class="level-item"><span class="level-chip" style="background:#22c55e"></span>양수 : 1년 전 대비 상승</div>
+              <div class="level-item"><span class="level-chip" style="background:#ef4444"></span>음수 : 1년 전 대비 하락</div>
+              <div class="level-item"><span class="level-chip" style="background:#94a3b8"></span>YTD는 올해만, YoY는 지난 1년 구간을 나타냅니다.</div>
+            </div>
+          </div>
+
           <!-- MDD -->
-          <div class="metric-panel active" data-metric="mdd">
+          <div class="metric-panel" data-metric="mdd">
             <h3>MDD <span class="metric-subtitle-inline">최대 낙폭</span></h3>
             <p class="metric-subtitle">52주 고점 대비 현재 가격의 하락 비율입니다.</p>
             <div class="metric-section-title">계산 방식</div>

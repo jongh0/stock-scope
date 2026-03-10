@@ -380,12 +380,21 @@ def fetch_all():
             # 일간 수익률
             change_pct = (price - prev_close) / prev_close * 100
 
-            # 52주 고점 & MDD & 연간 수익률
+            # 52주 고점 & MDD & YoY (연간 수익률)
             hist_1y = hist.iloc[-252:]
             high_52w = float(hist_1y.max())
             mdd_52w  = (price - high_52w) / high_52w * 100
             price_1y = float(hist_1y.iloc[0])
             year_pct = (price - price_1y) / price_1y * 100
+
+            # YTD (해당 연도 첫 거래일 종가 대비)
+            current_year = hist.index[-1].year
+            hist_ytd = hist[hist.index.year == current_year]
+            if not hist_ytd.empty and len(hist_ytd) >= 1:
+                price_ytd_start = float(hist_ytd.iloc[0])
+                ytd_pct = (price - price_ytd_start) / price_ytd_start * 100
+            else:
+                ytd_pct = None
 
             # 샤프 지수 (1년 기준)
             if len(hist) >= 30:
@@ -481,6 +490,7 @@ def fetch_all():
                 "price":      round(price, 2),
                 "change_pct": round(change_pct, 2),
                 "year_pct":   round(year_pct, 2),
+                "ytd_pct":    round(ytd_pct, 2) if ytd_pct is not None else None,
                 "mdd_52w":    round(mdd_52w, 2),
                 "beta":       beta,
                 "sharpe":     sharpe,

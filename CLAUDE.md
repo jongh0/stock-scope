@@ -51,7 +51,8 @@ All modules are plain globals — no bundler, no ES modules.
       "currency": "USD",
       "price": 227.52,
       "change_pct": -0.85,
-      "week_pct": 1.23,
+      "year_pct": 12.5,
+      "ytd_pct": 8.2,
       "mdd_52w": -18.4,
       "rsi": 48.3,
       "macd_hist": 0.123,
@@ -74,7 +75,8 @@ All modules are plain globals — no bundler, no ES modules.
 - **RSI(14)**: Standard Wilder RSI using rolling mean of gains/losses
 - **MACD**: EMA(12) − EMA(26), signal=EMA(9); `macd_hist` = MACD − signal; `macd_up` = histogram increasing
 - **MDD**: `(price − 52w_high) / 52w_high × 100` (uses last 252 trading days)
-- **week_pct**: 5 trading days ago close → current price change
+- **YoY (year_pct)**: 1 year ago close → current price change
+- **YTD (ytd_pct)**: First trading day of current year close → current price change
 
 ### Sparkline Rendering (sparkline.js)
 - Pure SVG, inline as HTML string — no canvas, no ECharts
