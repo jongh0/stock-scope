@@ -56,6 +56,9 @@ class StockScope {
     }, { passive: true });
 
     document.addEventListener('touchend', e => {
+      const modal = document.getElementById('metricsModal');
+      if (!modal.hidden) return;
+
       const dx = e.changedTouches[0].clientX - startX;
       const dy = e.changedTouches[0].clientY - startY;
       if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;

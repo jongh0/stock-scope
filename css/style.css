@@ -702,14 +702,6 @@ body {
     color: var(--text);
   }
 
-  .stock-row td.col-ytd {
-    grid-column: 2;
-    grid-row: 1;
-    display: flex !important;
-    align-items: center;
-    gap: 4px;
-  }
-
   .mobile-ticker {
     display: inline;
     color: var(--accent);
@@ -737,6 +729,13 @@ body {
   }
 
   .stock-row td.col-pct    { display: none !important; }
+  .stock-row td.col-ytd {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+  }
   .stock-row td.col-beta   { display: none !important; }
   .stock-row td.col-per    { display: none !important; }
   .stock-row td.col-sharpe { display: none !important; }
