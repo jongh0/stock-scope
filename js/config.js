@@ -5,7 +5,7 @@
 const GROUPS = [
   {
     id: 'us-index',
-    name: '주요지수',
+    name: '주요 ETF',
     stocks: [
       { name: 'S&P500',     ticker: 'VOO' },
       { name: '나스닥100',  ticker: 'QQQ' },
@@ -42,58 +42,6 @@ const GROUPS = [
       { name: '코스트코',       ticker: 'COST' },   // ~$0.4T
       { name: '오라클',         ticker: 'ORCL' },   // ~$0.4T
       { name: 'ASML',           ticker: 'ASML' },   // ~$0.38T
-    ],
-  },
-  {
-    id: 'kr-top20',
-    name: 'KR TOP 20',
-    // 2025 기준 코스피 시가총액 상위 20개 (우선주 제외)
-    stocks: [
-      { name: '삼성전자',       ticker: '005930.KS', currency: 'KRW' },  // ~710조
-      { name: 'SK하이닉스',     ticker: '000660.KS', currency: 'KRW' },  // ~474조
-      { name: 'LG에너지솔루션', ticker: '373220.KS', currency: 'KRW' },  // ~86조
-      { name: '삼성바이오로직스', ticker: '207940.KS', currency: 'KRW' }, // ~79조
-      { name: '현대차',         ticker: '005380.KS', currency: 'KRW' },  // ~61조
-      { name: 'HD현대중공업',   ticker: '329180.KS', currency: 'KRW' },  // ~53조
-      { name: 'SK스퀘어',       ticker: '402340.KS', currency: 'KRW' },  // ~49조
-      { name: '한화에어로스페이스', ticker: '012450.KS', currency: 'KRW' }, // ~49조
-      { name: '두산에너빌리티', ticker: '034020.KS', currency: 'KRW' },  // ~48조
-      { name: 'KB금융',         ticker: '105560.KS', currency: 'KRW' },  // ~48조
-      { name: '기아',           ticker: '000270.KS', currency: 'KRW' },  // ~48조
-      { name: '셀트리온',       ticker: '068270.KS', currency: 'KRW' },  // ~42조
-      { name: '삼성물산',       ticker: '028260.KS', currency: 'KRW' },  // ~41조
-      { name: 'NAVER',          ticker: '035420.KS', currency: 'KRW' },  // ~38조
-      { name: '신한지주',       ticker: '055550.KS', currency: 'KRW' },  // ~37조
-      { name: '한화오션',       ticker: '042660.KS', currency: 'KRW' },  // ~35조
-      { name: '현대모비스',     ticker: '012330.KS', currency: 'KRW' },  // ~34조
-      { name: '삼성생명',       ticker: '032830.KS', currency: 'KRW' },  // ~32조
-      { name: '한국전력',       ticker: '015760.KS', currency: 'KRW' },  // ~30조
-      { name: '하나금융지주',   ticker: '086790.KS', currency: 'KRW' },  // ~29조
-    ],
-  },
-  {
-    id: 'kr-etf',
-    name: 'KR ETF',
-    // 2025 기준 순자산 상위 국내 ETF (금리형 중복 제외)
-    stocks: [
-      { name: 'TIGER 미국S&P500',     ticker: '360750.KS', currency: 'KRW' },
-      { name: 'TIGER 미국나스닥100',  ticker: '133690.KS', currency: 'KRW' },
-      { name: 'TIGER 미국테크TOP10',  ticker: '381180.KS', currency: 'KRW' },
-      { name: 'SOL 미국배당다우존스', ticker: '446720.KS', currency: 'KRW' },
-      { name: 'KODEX 200',            ticker: '069500.KS', currency: 'KRW' },
-      { name: 'KODEX 레버리지',       ticker: '122630.KS', currency: 'KRW' },
-      { name: 'KODEX 인버스',         ticker: '114800.KS', currency: 'KRW' },
-      { name: 'KODEX 인버스2X',       ticker: '252670.KS', currency: 'KRW' },
-      { name: 'TIGER 원자재선물',     ticker: '139320.KS', currency: 'KRW' },
-      { name: 'KODEX 종합채권',       ticker: '273130.KS', currency: 'KRW' },
-      // 테마형
-      { name: 'TIGER K방산&우주',     ticker: '463250.KS', currency: 'KRW' },
-      { name: 'KODEX AI반도체',       ticker: '395160.KS', currency: 'KRW' },
-      { name: 'KODEX 미국AI전력인프라', ticker: '487230.KS', currency: 'KRW' },
-      { name: 'KODEX 로봇액티브',     ticker: '445290.KS', currency: 'KRW' },
-      { name: 'TIGER 코스닥바이오',   ticker: '261070.KS', currency: 'KRW' },
-      { name: 'SOL 미국양자컴퓨팅',   ticker: '0023A0.KS', currency: 'KRW' },
-      { name: 'TIGER 비만치료제',     ticker: '476690.KS', currency: 'KRW' },
     ],
   },
   {
@@ -288,6 +236,58 @@ const GROUPS = [
       { name: '인튜이티브서지컬', ticker: 'ISRG' },
       { name: '화이자',           ticker: 'PFE' },
       { name: '덱스콤',           ticker: 'DXCM' },
+    ],
+  },
+  {
+    id: 'kr-etf',
+    name: 'KR ETF',
+    // 2025 기준 순자산 상위 국내 ETF (금리형 중복 제외)
+    stocks: [
+      { name: 'TIGER 미국S&P500',     ticker: '360750.KS', currency: 'KRW' },
+      { name: 'TIGER 미국나스닥100',  ticker: '133690.KS', currency: 'KRW' },
+      { name: 'TIGER 미국테크TOP10',  ticker: '381180.KS', currency: 'KRW' },
+      { name: 'SOL 미국배당다우존스', ticker: '446720.KS', currency: 'KRW' },
+      { name: 'KODEX 200',            ticker: '069500.KS', currency: 'KRW' },
+      { name: 'KODEX 레버리지',       ticker: '122630.KS', currency: 'KRW' },
+      { name: 'KODEX 인버스',         ticker: '114800.KS', currency: 'KRW' },
+      { name: 'KODEX 인버스2X',       ticker: '252670.KS', currency: 'KRW' },
+      { name: 'TIGER 원자재선물',     ticker: '139320.KS', currency: 'KRW' },
+      { name: 'KODEX 종합채권',       ticker: '273130.KS', currency: 'KRW' },
+      // 테마형
+      { name: 'TIGER K방산&우주',     ticker: '463250.KS', currency: 'KRW' },
+      { name: 'KODEX AI반도체',       ticker: '395160.KS', currency: 'KRW' },
+      { name: 'KODEX 미국AI전력인프라', ticker: '487230.KS', currency: 'KRW' },
+      { name: 'KODEX 로봇액티브',     ticker: '445290.KS', currency: 'KRW' },
+      { name: 'TIGER 코스닥바이오',   ticker: '261070.KS', currency: 'KRW' },
+      { name: 'SOL 미국양자컴퓨팅',   ticker: '0023A0.KS', currency: 'KRW' },
+      { name: 'TIGER 비만치료제',     ticker: '476690.KS', currency: 'KRW' },
+    ],
+  },
+  {
+    id: 'kr-top20',
+    name: 'KR TOP 20',
+    // 2025 기준 코스피 시가총액 상위 20개 (우선주 제외)
+    stocks: [
+      { name: '삼성전자',       ticker: '005930.KS', currency: 'KRW' },  // ~710조
+      { name: 'SK하이닉스',     ticker: '000660.KS', currency: 'KRW' },  // ~474조
+      { name: 'LG에너지솔루션', ticker: '373220.KS', currency: 'KRW' },  // ~86조
+      { name: '삼성바이오로직스', ticker: '207940.KS', currency: 'KRW' }, // ~79조
+      { name: '현대차',         ticker: '005380.KS', currency: 'KRW' },  // ~61조
+      { name: 'HD현대중공업',   ticker: '329180.KS', currency: 'KRW' },  // ~53조
+      { name: 'SK스퀘어',       ticker: '402340.KS', currency: 'KRW' },  // ~49조
+      { name: '한화에어로스페이스', ticker: '012450.KS', currency: 'KRW' }, // ~49조
+      { name: '두산에너빌리티', ticker: '034020.KS', currency: 'KRW' },  // ~48조
+      { name: 'KB금융',         ticker: '105560.KS', currency: 'KRW' },  // ~48조
+      { name: '기아',           ticker: '000270.KS', currency: 'KRW' },  // ~48조
+      { name: '셀트리온',       ticker: '068270.KS', currency: 'KRW' },  // ~42조
+      { name: '삼성물산',       ticker: '028260.KS', currency: 'KRW' },  // ~41조
+      { name: 'NAVER',          ticker: '035420.KS', currency: 'KRW' },  // ~38조
+      { name: '신한지주',       ticker: '055550.KS', currency: 'KRW' },  // ~37조
+      { name: '한화오션',       ticker: '042660.KS', currency: 'KRW' },  // ~35조
+      { name: '현대모비스',     ticker: '012330.KS', currency: 'KRW' },  // ~34조
+      { name: '삼성생명',       ticker: '032830.KS', currency: 'KRW' },  // ~32조
+      { name: '한국전력',       ticker: '015760.KS', currency: 'KRW' },  // ~30조
+      { name: '하나금융지주',   ticker: '086790.KS', currency: 'KRW' },  // ~29조
     ],
   },
 ];
