@@ -198,6 +198,7 @@ class StockScope {
                 <th class="col-beta" data-col="beta">베타 ${sortArrow('beta')}</th>
                 <th class="col-sharpe" data-col="sharpe">샤프 ${sortArrow('sharpe')}</th>
                 <th class="col-per" data-col="per">PER ${sortArrow('per')}</th>
+                <th class="col-upside" data-col="upside_pct">목표가 ${sortArrow('upside_pct')}</th>
                 <th class="col-div" data-col="div_yield">배당률 ${sortArrow('div_yield')}</th>
                 <th class="col-rsi" data-col="rsi">RSI(14) ${sortArrow('rsi')}</th>
                 <th class="col-macd" data-col="macd_hist">MACD ${sortArrow('macd_hist')}</th>
@@ -249,6 +250,12 @@ class StockScope {
 
     // PER
     const perStr = s.per != null ? s.per.toFixed(1) : '-';
+
+    // 목표가 업사이드
+    const upsideStr = s.upside_pct != null
+      ? (s.upside_pct > 0 ? '+' : '') + s.upside_pct.toFixed(1) + '%'
+      : '-';
+    const upsideCls = s.upside_pct == null ? '' : s.upside_pct >= 15 ? 'upside-high' : s.upside_pct >= 0 ? 'upside-pos' : 'upside-neg';
 
     // 배당률
     const divStr = s.div_yield != null && s.div_yield > 0
@@ -305,6 +312,7 @@ class StockScope {
         <td class="col-beta"><span class="beta-badge ${betaCls}">${betaStr}</span></td>
         <td class="col-sharpe"><span class="sharpe-badge ${sharpeCls}">${sharpeStr}</span></td>
         <td class="col-per">${perStr}</td>
+        <td class="col-upside"><span class="${upsideCls}">${upsideStr}</span></td>
         <td class="col-div">${divStr}</td>
         <td class="col-rsi">
           <div class="indicator-cell">

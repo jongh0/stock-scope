@@ -388,7 +388,11 @@ body {
 .col-beta   { min-width: 60px; color: var(--text-muted); }
 .col-sharpe { min-width: 64px; color: var(--text-muted); }
 .col-per    { min-width: 68px; color: var(--text-muted); }
+.col-upside { min-width: 72px; color: var(--text-muted); }
 .col-div    { min-width: 68px; color: var(--text-muted); }
+.upside-high { color: #22c55e; font-weight: 600; }
+.upside-pos  { color: #86efac; }
+.upside-neg  { color: var(--negative); }
 .col-rsi    { min-width: 110px; }
 .col-macd   { min-width: 110px; }
 
@@ -739,6 +743,7 @@ body {
   .stock-row td.col-beta   { display: none !important; }
   .stock-row td.col-per    { display: none !important; }
   .stock-row td.col-sharpe { display: none !important; }
+  .stock-row td.col-upside { display: none !important; }
   .stock-row td.col-div    { display: none !important; }
 
   /* Mobile Row 2 Layout (현재가 | YoY) */

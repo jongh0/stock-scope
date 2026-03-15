@@ -446,6 +446,7 @@ def fetch_all():
                 per, div_yield = naver_data.get(code6, (None, None))
                 if ticker in NO_PER_TICKERS:
                     per = None
+                upside_pct = None
                 beta = None
             else:
                 # 미국 종목 → yfinance
@@ -461,6 +462,8 @@ def fetch_all():
                         div_yield = None
                     pe = info.get('trailingPE')
                     per = round(float(pe), 1) if pe and ticker not in NO_PER_TICKERS else None
+                    target = info.get('targetMeanPrice')
+                    upside_pct = round((float(target) - price) / price * 100, 1) if target and price else None
                     b = info.get('beta')
                     beta = round(float(b), 2) if b is not None else None
                     # yfinance beta가 None인 경우(주로 ETF) → S&P500 대비 직접 계산
@@ -477,6 +480,7 @@ def fetch_all():
                 except Exception:
                     div_yield = None
                     per = None
+                    upside_pct = None
                     beta = None
 
             # 200일 이평선
@@ -498,6 +502,7 @@ def fetch_all():
                 "beta":       beta,
                 "sharpe":     sharpe,
                 "per":        per,
+                "upside_pct": upside_pct,
                 "div_yield":  div_yield,
                 "rsi":        round(rsi, 1) if rsi is not None else None,
                 "rsi_30d":    rsi_30d,
