@@ -19,7 +19,7 @@ update.bat                  # Downloads latest data for all tickers
 ```bash
 pip install yfinance pandas numpy requests
 
-python scripts/update_data.py   # Downloads 3-year history for all ~86 tickers via yfinance
+python scripts/update_data.py   # Downloads 3-year history for all ~162 tickers via yfinance
 ```
 
 ## Architecture
@@ -54,6 +54,11 @@ All modules are plain globals — no bundler, no ES modules.
       "year_pct": 12.5,
       "ytd_pct": 8.2,
       "mdd_52w": -18.4,
+      "beta": 1.12,
+      "sharpe": 0.48,
+      "per": 31.7,
+      "upside_pct": 18.1,   // (targetMeanPrice - price) / price × 100; null for ETF/크립토/채권
+      "div_yield": 0.41,
       "rsi": 48.3,
       "macd_hist": 0.123,
       "macd_up": true,
@@ -77,6 +82,7 @@ All modules are plain globals — no bundler, no ES modules.
 - **MDD**: `(price − 52w_high) / 52w_high × 100` (uses last 252 trading days)
 - **YoY (year_pct)**: 1 year ago close → current price change
 - **YTD (ytd_pct)**: First trading day of current year close → current price change
+- **Upside (upside_pct)**: `(targetMeanPrice − price) / price × 100` via yfinance `info`; null for ETF·크립토·채권·원자재 (`NO_PER_TICKERS`와 동일 범위)
 
 ### Sparkline Rendering (sparkline.js)
 - Pure SVG, inline as HTML string — no canvas, no ECharts
@@ -96,6 +102,9 @@ All modules are plain globals — no bundler, no ES modules.
 | MACD | `macd-bull-weak` | hist > 0 && decreasing |
 | MACD | `macd-bear-weak` | hist < 0 && increasing |
 | MACD | `macd-bear-strong` | hist < 0 && decreasing |
+| Upside | `upside-high` | upside_pct ≥ 15% |
+| Upside | `upside-pos` | 0% ≤ upside_pct < 15% |
+| Upside | `upside-neg` | upside_pct < 0% |
 
 ### Theme
 - Dark/light toggle stored in `localStorage('ss-theme')`, applied as `data-theme` on `<html>`

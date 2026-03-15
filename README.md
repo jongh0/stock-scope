@@ -18,7 +18,7 @@
 | 원자재 ETF | GLD, SLV, PPLT, CPER, USO, UNG, DBC, DBA, WEAT |
 | 배당 ETF | VIG, DGRO, SCHD, SPYD, JEPI, JEPQ |
 | 지역 ETF | VGK, EWJ, EWY, EWT, EEM, INDA, MCHI, EWZ |
-| 크립토 | IBIT, FBTC, ETHA, BITQ, COIN, MSTR, HOOD, CRCL, MARA, RIOT, CLSK |
+| 크립토 | BTC-USD, ETH-USD, IBIT, FBTC, ETHA, BITQ, COIN, MSTR, HOOD, CRCL, MARA, RIOT, CLSK |
 | 빅테크 | AAPL, MSFT, GOOGL, AMZN, TSLA, META, NVDA |
 | 반도체 | NVDA, AVGO, ASML, TSM, ARM, AMD, QCOM, MU, AMAT, LRCX, INTC |
 | 결제·금융 | JPM, BAC, GS, MS, V, MA, AXP, SCHW, PYPL, XYZ |
@@ -30,7 +30,7 @@
 
 ## 표시 항목
 
-현재가 · 일간(%) · YoY · YTD · MDD · 베타 · 샤프 · PER · 배당률 · RSI(14) · MACD · 30일/1년/5년 스파크라인
+현재가 · 일간(%) · YoY · YTD · MDD · 베타 · 샤프 · PER · 목표가(업사이드%) · 배당률 · RSI(14) · MACD · 30일/1년/5년 스파크라인
 
 - 컬럼 클릭 정렬
 - 지표 설명 모달 (헤더 `?` 버튼 → MDD · 베타 · 샤프 · PER · RSI · MACD 설명)
@@ -49,11 +49,11 @@ update.bat    # 데이터 갱신
 | 항목 | 출처 |
 |------|------|
 | 가격 · 차트 히스토리 | [yfinance](https://github.com/ranaroussi/yfinance) (Yahoo Finance) |
-| 미국 종목 PER · 배당률 | yfinance |
+| 미국 종목 PER · 배당률 · 목표주가 | yfinance (`trailingPE`, `dividendYield`, `targetMeanPrice`) |
 | 한국 종목 PER · 배당률 | [네이버 금융](https://finance.naver.com) |
 
 - 갱신: GitHub Actions 매시간 자동 실행
-- 저장: `data/stocks.json` (약 86개 티커)
+- 저장: `data/stocks.json` (약 162개 티커)
 
 ## 요구사항
 
