@@ -105,6 +105,8 @@ const GROUPS = [
     id: 'crypto',
     name: '크립토',
     stocks: [
+      { name: '비트코인',        ticker: 'BTC-USD' },
+      { name: '이더리움',        ticker: 'ETH-USD' },
       { name: '비트코인 ETF',    ticker: 'IBIT' },   // BlackRock BTC ETF
       { name: '비트코인 ETF-F', ticker: 'FBTC' },   // Fidelity BTC ETF
       { name: '이더리움 ETF',   ticker: 'ETHA' },   // BlackRock ETH ETF

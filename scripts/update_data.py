@@ -61,6 +61,8 @@ STOCKS = {
     "XLE":       {"name": "에너지섹터",         "currency": "USD"},
     "XLC":       {"name": "커뮤니케이션섹터",   "currency": "USD"},
     # 크립토
+    "BTC-USD":   {"name": "비트코인",       "currency": "USD"},
+    "ETH-USD":   {"name": "이더리움",       "currency": "USD"},
     "IBIT":      {"name": "비트코인 ETF",   "currency": "USD"},
     "FBTC":      {"name": "비트코인 ETF-F", "currency": "USD"},
     "ETHA":      {"name": "이더리움 ETF",   "currency": "USD"},
@@ -227,7 +229,8 @@ NO_PER_TICKERS = {
     "TLT", "AGG", "HYG", "BIL", "273130.KS",
     # 원자재
     "GLD", "SLV", "CPER", "USO", "UNG", "DBC", "DBA", "PPLT", "WEAT",
-    # 크립토 ETF
+    # 크립토 코인 및 ETF
+    "BTC-USD", "ETH-USD",
     "IBIT", "FBTC", "ETHA", "BITQ",
     # 배당·커버드콜 ETF
     "DGRO", "VIG", "SCHD", "SPYD", "JEPI", "JEPQ",
