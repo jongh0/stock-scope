@@ -765,12 +765,12 @@ body {
   .stock-row td.col-mdd::before  { content: 'MDD';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
   .stock-row td.col-rsi::before  { content: 'RSI';   font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
 
-  /* Mobile Chart Section (14=30일, 15=1년, 16=5년) */
-  /* Hide 5Y Chart on Mobile */
-  .stock-row td:nth-child(16) { display: none !important; }
+  /* Mobile Chart Section (15=30일, 16=1년, 17=3년) */
+  /* Hide 3Y Chart on Mobile */
+  .stock-row td:nth-child(17) { display: none !important; }
 
-  .stock-row td:nth-child(14),
-  .stock-row td:nth-child(15) {
+  .stock-row td:nth-child(15),
+  .stock-row td:nth-child(16) {
     grid-row: 4;
     min-width: 0;
     display: flex !important;
@@ -782,14 +782,14 @@ body {
     border-top: 1px solid var(--border);
   }
 
-  .stock-row td:nth-child(14) { grid-column: 1; }
-  .stock-row td:nth-child(15) { grid-column: 2; }
+  .stock-row td:nth-child(15) { grid-column: 1; }
+  .stock-row td:nth-child(16) { grid-column: 2; }
 
-  .stock-row td:nth-child(14)::before { content: '30일'; font-size: 10px; color: var(--text-muted); }
-  .stock-row td:nth-child(15)::before { content: '1년'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(15)::before { content: '30일'; font-size: 10px; color: var(--text-muted); }
+  .stock-row td:nth-child(16)::before { content: '1년'; font-size: 10px; color: var(--text-muted); }
 
-  .stock-row td:nth-child(14) .sparkline,
-  .stock-row td:nth-child(15) .sparkline {
+  .stock-row td:nth-child(15) .sparkline,
+  .stock-row td:nth-child(16) .sparkline {
     height: 20px;
     min-width: 0;
     width: 100%;
