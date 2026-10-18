@@ -122,7 +122,8 @@ class StockScope {
     const group = GROUPS.find(g => g.id === this.activeGroup);
     if (!group || !this.data) return;
 
-    let stocks = group.stocks.map(s => ({
+    const groupStocks = this.data.rankings?.[group.id] || group.stocks;
+    let stocks = groupStocks.map(s => ({
       ...(this.data.stocks?.[s.ticker] || {}),
       ...s,
     }));
@@ -216,7 +217,7 @@ class StockScope {
     `;
   }
   _buildRow(s, up, down, neutral) {
-    const currency = TICKER_CURRENCY[s.ticker] || 'USD';
+    const currency = s.currency || TICKER_CURRENCY[s.ticker] || (s.ticker?.endsWith('.KS') ? 'KRW' : 'USD');
     const sym      = currency === 'KRW' ? '₩' : '$';
     const noData   = !s.price;
 

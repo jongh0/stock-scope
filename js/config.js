@@ -107,6 +107,7 @@ const GROUPS = [
     stocks: [
       { name: '비트코인',        ticker: 'BTC-USD' },
       { name: '이더리움',        ticker: 'ETH-USD' },
+      { name: '솔라나',          ticker: 'SOL-USD' },
       { name: '비트코인 ETF',    ticker: 'IBIT' },   // BlackRock BTC ETF
       { name: '비트코인 ETF-F', ticker: 'FBTC' },   // Fidelity BTC ETF
       { name: '이더리움 ETF',   ticker: 'ETHA' },   // BlackRock ETH ETF
@@ -117,7 +118,6 @@ const GROUPS = [
       { name: '서클',           ticker: 'CRCL' },   // USDC 발행사
       { name: '마라톤 디지털',  ticker: 'MARA' },   // BTC 채굴
       { name: '라이엇 플랫폼',  ticker: 'RIOT' },   // BTC 채굴
-      { name: '클린스파크',     ticker: 'CLSK' },   // BTC 채굴
     ],
   },
   {
@@ -143,6 +143,7 @@ const GROUPS = [
       { name: 'TSMC',              ticker: 'TSM' },
       { name: 'ARM홀딩스',         ticker: 'ARM' },
       { name: 'AMD',               ticker: 'AMD' },
+      { name: '텍사스인스트루먼트', ticker: 'TXN' },
       { name: '퀄컴',              ticker: 'QCOM' },
       { name: '마이크론',          ticker: 'MU' },
       { name: '어플라이드머티리얼즈', ticker: 'AMAT' },
@@ -156,14 +157,14 @@ const GROUPS = [
     stocks: [
       { name: 'JP모건',             ticker: 'JPM' },
       { name: 'BOA',                ticker: 'BAC' },
+      { name: '웰스파고',           ticker: 'WFC' },
       { name: '골드만삭스',         ticker: 'GS' },
       { name: '모건스탠리',         ticker: 'MS' },
+      { name: '블랙록',             ticker: 'BLK' },
       { name: '비자',               ticker: 'V' },
       { name: '마스터카드',         ticker: 'MA' },
       { name: '아메리칸익스프레스', ticker: 'AXP' },
       { name: '찰스슈왑',           ticker: 'SCHW' },
-      { name: '페이팔',             ticker: 'PYPL' },
-      { name: '블록',               ticker: 'XYZ' },
     ],
   },
   {
@@ -172,11 +173,11 @@ const GROUPS = [
     stocks: [
       { name: '테슬라',  ticker: 'TSLA' },
       { name: '토요타',  ticker: 'TM' },
+      { name: '페라리',  ticker: 'RACE' },
+      { name: '우버',    ticker: 'UBER' },
       { name: 'GM',      ticker: 'GM' },
       { name: '포드',    ticker: 'F' },
-      { name: '니오',    ticker: 'NIO' },
       { name: '리비안',  ticker: 'RIVN' },
-      { name: '루시드',  ticker: 'LCID' },
     ],
   },
   {
@@ -197,15 +198,16 @@ const GROUPS = [
     name: 'SW·클라우드',
     stocks: [
       { name: '마이크로소프트', ticker: 'MSFT' },
+      { name: '오라클',         ticker: 'ORCL' },
+      { name: '팔란티어',       ticker: 'PLTR' },
+      { name: '팔로알토',       ticker: 'PANW' },
       { name: '서비스나우',     ticker: 'NOW' },
       { name: '세일즈포스',     ticker: 'CRM' },
       { name: '어도비',         ticker: 'ADBE' },
       { name: '쇼피파이',       ticker: 'SHOP' },
-      { name: '팔란티어',       ticker: 'PLTR' },
       { name: '스노우플레이크', ticker: 'SNOW' },
       { name: '클라우드플레어', ticker: 'NET' },
       { name: '데이터독',       ticker: 'DDOG' },
-      { name: '오토데스크',     ticker: 'ADSK' },
     ],
   },
   {
@@ -215,6 +217,7 @@ const GROUPS = [
       { name: '아마존',    ticker: 'AMZN' },
       { name: '월마트',    ticker: 'WMT' },
       { name: '코스트코',  ticker: 'COST' },
+      { name: '홈디포',    ticker: 'HD' },
       { name: 'P&G',       ticker: 'PG' },
       { name: '코카콜라',  ticker: 'KO' },
       { name: '필립모리스', ticker: 'PM' },
@@ -222,28 +225,28 @@ const GROUPS = [
       { name: '타겟',      ticker: 'TGT' },
       { name: '스타벅스',  ticker: 'SBUX' },
       { name: '나이키',    ticker: 'NKE' },
-      { name: '룰루레몬',  ticker: 'LULU' },
     ],
   },
   {
     id: 'healthcare',
     name: '헬스케어',
     stocks: [
-      { name: '유나이티드헬스',   ticker: 'UNH' },
       { name: '일라이릴리',       ticker: 'LLY' },
-      { name: '애브비',           ticker: 'ABBV' },
       { name: '존슨앤존슨',       ticker: 'JNJ' },
+      { name: '애브비',           ticker: 'ABBV' },
+      { name: '유나이티드헬스',   ticker: 'UNH' },
       { name: '머크',             ticker: 'MRK' },
+      { name: '노보노디스크',     ticker: 'NVO' },
+      { name: '써모피셔',         ticker: 'TMO' },
       { name: '암젠',             ticker: 'AMGN' },
       { name: '인튜이티브서지컬', ticker: 'ISRG' },
       { name: '화이자',           ticker: 'PFE' },
-      { name: '덱스콤',           ticker: 'DXCM' },
     ],
   },
   {
     id: 'kr-etf',
     name: 'KR ETF',
-    // 2025 기준 순자산 상위 국내 ETF (금리형 중복 제외)
+    // 순자산 상위 국내 ETF (금리형 중복 제외)
     stocks: [
       { name: 'TIGER 미국S&P500',     ticker: '360750.KS', currency: 'KRW' },
       { name: 'TIGER 미국나스닥100',  ticker: '133690.KS', currency: 'KRW' },
@@ -253,14 +256,14 @@ const GROUPS = [
       { name: 'KODEX 레버리지',       ticker: '122630.KS', currency: 'KRW' },
       { name: 'KODEX 인버스',         ticker: '114800.KS', currency: 'KRW' },
       { name: 'KODEX 인버스2X',       ticker: '252670.KS', currency: 'KRW' },
-      { name: 'TIGER 원자재선물',     ticker: '139320.KS', currency: 'KRW' },
+      { name: 'ACE KRX금현물',        ticker: '411060.KS', currency: 'KRW' },
       { name: 'KODEX 종합채권',       ticker: '273130.KS', currency: 'KRW' },
       // 테마형
-      { name: 'TIGER K방산&우주',     ticker: '463250.KS', currency: 'KRW' },
+      { name: 'TIGER 반도체TOP10',    ticker: '396500.KS', currency: 'KRW' },
       { name: 'KODEX AI반도체',       ticker: '395160.KS', currency: 'KRW' },
       { name: 'KODEX 미국AI전력인프라', ticker: '487230.KS', currency: 'KRW' },
+      { name: 'TIGER K방산&우주',     ticker: '463250.KS', currency: 'KRW' },
       { name: 'KODEX 로봇액티브',     ticker: '445290.KS', currency: 'KRW' },
-      { name: 'TIGER 코스닥바이오',   ticker: '261070.KS', currency: 'KRW' },
       { name: 'SOL 미국양자컴퓨팅',   ticker: '0023A0.KS', currency: 'KRW' },
       { name: 'TIGER 비만치료제',     ticker: '476690.KS', currency: 'KRW' },
     ],

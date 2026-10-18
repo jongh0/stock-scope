@@ -63,6 +63,7 @@ STOCKS = {
     # 크립토
     "BTC-USD":   {"name": "비트코인",       "currency": "USD"},
     "ETH-USD":   {"name": "이더리움",       "currency": "USD"},
+    "SOL-USD":   {"name": "솔라나",         "currency": "USD"},
     "IBIT":      {"name": "비트코인 ETF",   "currency": "USD"},
     "FBTC":      {"name": "비트코인 ETF-F", "currency": "USD"},
     "ETHA":      {"name": "이더리움 ETF",   "currency": "USD"},
@@ -70,7 +71,6 @@ STOCKS = {
     "MSTR":      {"name": "스트래티지",     "currency": "USD"},
     "MARA":      {"name": "마라톤 디지털",  "currency": "USD"},
     "RIOT":      {"name": "라이엇 플랫폼",  "currency": "USD"},
-    "CLSK":      {"name": "클린스파크",     "currency": "USD"},
     "HOOD":      {"name": "로빈후드",       "currency": "USD"},
     "BITQ":      {"name": "크립토 기업 ETF", "currency": "USD"},
     # 스테이블코인 관련
@@ -113,6 +113,7 @@ STOCKS = {
     "TSM":       {"name": "TSMC",               "currency": "USD"},
     "INTC":      {"name": "인텔",               "currency": "USD"},
     "QCOM":      {"name": "퀄컴",               "currency": "USD"},
+    "TXN":       {"name": "텍사스인스트루먼트",  "currency": "USD"},
     "AVGO":      {"name": "브로드컴",           "currency": "USD"},
     "MU":        {"name": "마이크론",           "currency": "USD"},
     "ARM":       {"name": "ARM홀딩스",          "currency": "USD"},
@@ -122,20 +123,20 @@ STOCKS = {
     "JPM":       {"name": "JP모건",             "currency": "USD"},
     "V":         {"name": "비자",               "currency": "USD"},
     "MA":        {"name": "마스터카드",         "currency": "USD"},
-    "PYPL":      {"name": "페이팔",             "currency": "USD"},
     "BAC":       {"name": "BOA",                "currency": "USD"},
+    "WFC":       {"name": "웰스파고",           "currency": "USD"},
     "GS":        {"name": "골드만삭스",         "currency": "USD"},
     "MS":        {"name": "모건스탠리",         "currency": "USD"},
+    "BLK":       {"name": "블랙록",             "currency": "USD"},
     "AXP":       {"name": "아메리칸익스프레스", "currency": "USD"},
     "SCHW":      {"name": "찰스슈왑",           "currency": "USD"},
-    "XYZ":       {"name": "블록",               "currency": "USD"},
     # 자동차/EV
     "F":         {"name": "포드",               "currency": "USD"},
     "GM":        {"name": "GM",                 "currency": "USD"},
     "RIVN":      {"name": "리비안",             "currency": "USD"},
     "TM":        {"name": "토요타",             "currency": "USD"},
-    "LCID":      {"name": "루시드",             "currency": "USD"},
-    "NIO":       {"name": "니오",               "currency": "USD"},
+    "RACE":      {"name": "페라리",             "currency": "USD"},
+    "UBER":      {"name": "우버",               "currency": "USD"},
     # 미디어/통신
     "NFLX":      {"name": "넷플릭스",           "currency": "USD"},
     "DIS":       {"name": "디즈니",             "currency": "USD"},
@@ -145,9 +146,10 @@ STOCKS = {
     "ROKU":      {"name": "로쿠",               "currency": "USD"},
     "TMUS":      {"name": "T모바일",            "currency": "USD"},
     # SW/클라우드
+    "ORCL":      {"name": "오라클",             "currency": "USD"},
+    "PANW":      {"name": "팔로알토",           "currency": "USD"},
     "ADBE":      {"name": "어도비",             "currency": "USD"},
     "CRM":       {"name": "세일즈포스",         "currency": "USD"},
-    "ADSK":      {"name": "오토데스크",         "currency": "USD"},
     "PLTR":      {"name": "팔란티어",           "currency": "USD"},
     "SNOW":      {"name": "스노우플레이크",     "currency": "USD"},
     "NOW":       {"name": "서비스나우",         "currency": "USD"},
@@ -157,6 +159,7 @@ STOCKS = {
     # 유통/소비재
     "WMT":       {"name": "월마트",             "currency": "USD"},
     "COST":      {"name": "코스트코",           "currency": "USD"},
+    "HD":        {"name": "홈디포",             "currency": "USD"},
     "XOM":       {"name": "엑손모빌",           "currency": "USD"},
     "MCD":       {"name": "맥도날드",           "currency": "USD"},
     "NKE":       {"name": "나이키",             "currency": "USD"},
@@ -165,7 +168,6 @@ STOCKS = {
     "TGT":       {"name": "타겟",               "currency": "USD"},
     "PG":        {"name": "P&G",                "currency": "USD"},
     "PM":        {"name": "필립모리스",         "currency": "USD"},
-    "LULU":      {"name": "룰루레몬",           "currency": "USD"},
     # 헬스케어
     "UNH":       {"name": "유나이티드헬스",     "currency": "USD"},
     "JNJ":       {"name": "존슨앤존슨",         "currency": "USD"},
@@ -173,12 +175,12 @@ STOCKS = {
     "LLY":       {"name": "일라이릴리",         "currency": "USD"},
     "ABBV":      {"name": "애브비",             "currency": "USD"},
     "MRK":       {"name": "머크",               "currency": "USD"},
+    "NVO":       {"name": "노보노디스크",       "currency": "USD"},
+    "TMO":       {"name": "써모피셔",           "currency": "USD"},
     "AMGN":      {"name": "암젠",               "currency": "USD"},
     "ISRG":      {"name": "인튜이티브서지컬",   "currency": "USD"},
-    "DXCM":      {"name": "덱스콤",             "currency": "USD"},
     # 기타 대형주
     "BRK-B":     {"name": "버크셔해서웨이",     "currency": "USD"},
-    "ORCL":      {"name": "오라클",             "currency": "USD"},
     # 한국 인기 ETF (코스피)
     "360750.KS": {"name": "TIGER 미국S&P500",     "currency": "KRW"},
     "133690.KS": {"name": "TIGER 미국나스닥100",  "currency": "KRW"},
@@ -188,14 +190,14 @@ STOCKS = {
     "122630.KS": {"name": "KODEX 레버리지",       "currency": "KRW"},
     "114800.KS": {"name": "KODEX 인버스",         "currency": "KRW"},
     "252670.KS": {"name": "KODEX 인버스2X",       "currency": "KRW"},
-    "139320.KS": {"name": "TIGER 원자재선물",     "currency": "KRW"},
+    "411060.KS": {"name": "ACE KRX금현물",        "currency": "KRW"},
     "273130.KS": {"name": "KODEX 종합채권",         "currency": "KRW"},
     # 테마형 ETF
+    "396500.KS": {"name": "TIGER 반도체TOP10",      "currency": "KRW"},
     "463250.KS": {"name": "TIGER K방산&우주",       "currency": "KRW"},
     "395160.KS": {"name": "KODEX AI반도체",         "currency": "KRW"},
     "487230.KS": {"name": "KODEX 미국AI전력인프라", "currency": "KRW"},
     "445290.KS": {"name": "KODEX 로봇액티브",       "currency": "KRW"},
-    "261070.KS": {"name": "TIGER 코스닥바이오",     "currency": "KRW"},
     "0023A0.KS": {"name": "SOL 미국양자컴퓨팅",    "currency": "KRW"},
     "476690.KS": {"name": "TIGER 비만치료제",       "currency": "KRW"},
     # 한국 시가총액 상위 (코스피)
@@ -223,14 +225,50 @@ STOCKS = {
 
 ALL_TICKERS = list(STOCKS.keys())
 
+# 기본 TOP 20 폴백 목록 (API 조회 실패 시 사용)
+DEFAULT_US_TOP20 = [
+    "NVDA", "AAPL", "GOOGL", "MSFT", "AMZN", "TSM", "META", "AVGO", "TSLA", "BRK-B",
+    "WMT", "LLY", "JPM", "XOM", "V", "JNJ", "ASML", "MA", "ORCL", "COST",
+]
+
+DEFAULT_KR_TOP20 = [
+    "005930.KS", "000660.KS", "207940.KS", "373220.KS", "005380.KS",
+    "034020.KS", "012450.KS", "329180.KS", "105560.KS", "402340.KS",
+    "000270.KS", "068270.KS", "028260.KS", "055550.KS", "035420.KS",
+    "042660.KS", "012330.KS", "032830.KS", "015760.KS", "086790.KS",
+]
+
+# 미국 대형주 한글 종목명 사전 (신규 TOP 20 진입 대비)
+US_KR_NAMES = {
+    **{k: v["name"] for k, v in STOCKS.items() if v["currency"] == "USD"},
+    "HD":   "홈디포",
+    "CVX":  "셰브론",
+    "NVO":  "노보노디스크",
+    "SAP":  "SAP",
+    "CSCO": "시스코",
+    "PEP":  "펩시코",
+    "LIN":  "린데",
+    "AZN":  "아스트라제네카",
+    "BABA": "알리바바",
+    "SHEL": "셸",
+    "ACN":  "액센츄어",
+    "IBM":  "IBM",
+    "GE":   "GE에어로스페이스",
+    "CAT":  "캐터필러",
+    "INTU": "인튜이트",
+    "TXN":  "텍사스인스트루먼트",
+    "BKNG": "부킹홀딩스",
+    "UBER": "우버",
+}
+
 # PER이 의미 없는 티커 (채권·원자재·크립토·배당·지역 ETF)
 NO_PER_TICKERS = {
     # 채권
     "TLT", "AGG", "HYG", "BIL", "273130.KS",
     # 원자재
-    "GLD", "SLV", "CPER", "USO", "UNG", "DBC", "DBA", "PPLT", "WEAT",
+    "GLD", "SLV", "CPER", "USO", "UNG", "DBC", "DBA", "PPLT", "WEAT", "411060.KS",
     # 크립토 코인 및 ETF
-    "BTC-USD", "ETH-USD",
+    "BTC-USD", "ETH-USD", "SOL-USD",
     "IBIT", "FBTC", "ETHA", "BITQ",
     # 배당·커버드콜 ETF
     "DGRO", "VIG", "SCHD", "SPYD", "JEPI", "JEPQ",
@@ -242,11 +280,123 @@ NO_PER_TICKERS = {
 
 
 # ──────────────────────────────────────────────────────────
-# 네이버 금융 (한국 종목 PER·배당률) - polling API 사용
+# 네이버 금융 (한국 종목 PER·배당률 및 시가총액 순위)
 # ──────────────────────────────────────────────────────────
+import re as _re
 import requests as _requests
 
 _NAVER_HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+
+
+def fetch_kr_top20():
+    """네이버 금융에서 코스피 시가총액 상위 20개 종목(우선주·ETF 제외)을 동적으로 조회."""
+    ranked = []
+    try:
+        url = 'https://m.stock.naver.com/api/stocks/marketValue/KOSPI?page=1&pageSize=50'
+        r = _requests.get(url, headers=_NAVER_HEADERS, timeout=10)
+        if r.status_code == 200:
+            items = r.json().get('stocks', [])
+            for it in items:
+                if it.get('stockEndType') and it.get('stockEndType') != 'stock':
+                    continue
+                code = (it.get('itemCode') or '').strip()
+                name = (it.get('stockName') or '').strip()
+                if len(code) != 6 or not code.endswith('0'):
+                    continue  # 우선주 제외 (보통주 코드는 0으로 끝남)
+                if name.endswith(('우', '우B', '우C', '우(전환)')):
+                    continue
+                ticker = f"{code}.KS"
+                clean_name = STOCKS.get(ticker, {}).get("name") or name
+                ranked.append({"name": clean_name, "ticker": ticker, "currency": "KRW"})
+                if len(ranked) >= 20:
+                    break
+    except Exception as e:
+        print(f"  [Rank] KR TOP 20 조회 실패: {e}")
+
+    if len(ranked) < 20:
+        print("  [Rank] KR TOP 20 기본 목록으로 폴백")
+        seen = {x["ticker"] for x in ranked}
+        for t in DEFAULT_KR_TOP20:
+            if t not in seen:
+                ranked.append({
+                    "name": STOCKS.get(t, {}).get("name", t),
+                    "ticker": t,
+                    "currency": "KRW",
+                })
+                if len(ranked) >= 20:
+                    break
+
+    return ranked[:20]
+
+
+def _normalize_us_ticker(sym):
+    """네이버/야후 미국 티커 표준화 및 동일 기업 중복 클래스 통합."""
+    sym = _re.sub(r'[\s\.]+', '-', sym.strip().upper())
+    if sym in ("GOOG", "GOOGL"):
+        return "GOOGL"
+    if sym in ("BRK-A", "BRK-B"):
+        return "BRK-B"
+    return sym
+
+
+def _clean_kr_stock_name(ticker, raw_name):
+    if ticker in US_KR_NAMES:
+        return US_KR_NAMES[ticker]
+    if ticker in STOCKS:
+        return STOCKS[ticker]["name"]
+    name = (raw_name or ticker).strip()
+    name = _re.sub(r'\s*(Class\s*[A-Z]|ADR|보통주|우선주|\([A-Z]\))\s*$', '', name, flags=_re.IGNORECASE).strip()
+    return name or ticker
+
+
+def fetch_us_top20():
+    """네이버 해외증시(NASDAQ + NYSE) 시가총액 순위를 조회하여 미국 상장 상위 20개 종목 반환."""
+    candidates = {}  # ticker -> (market_value, item_dict)
+    try:
+        for exch in ("NASDAQ", "NYSE"):
+            url = f'https://api.stock.naver.com/stock/exchange/{exch}/marketValue?page=1&pageSize=35'
+            r = _requests.get(url, headers=_NAVER_HEADERS, timeout=10)
+            if r.status_code != 200:
+                continue
+            items = r.json().get('stocks', [])
+            for it in items:
+                if it.get('stockEndType') and it.get('stockEndType') not in ('stock', 'equity'):
+                    continue
+                raw_sym = it.get('symbolCode') or it.get('reutersCode', '').split('.')[0]
+                if not raw_sym:
+                    continue
+                ticker = _normalize_us_ticker(raw_sym)
+                if ticker in NO_PER_TICKERS:
+                    continue
+                mv_raw = str(it.get('marketValue') or '0').replace(',', '').strip()
+                try:
+                    mv = float(mv_raw)
+                except ValueError:
+                    mv = 0.0
+                name = _clean_kr_stock_name(ticker, it.get('stockName'))
+                if ticker not in candidates or mv > candidates[ticker][0]:
+                    candidates[ticker] = (mv, {"name": name, "ticker": ticker, "currency": "USD"})
+    except Exception as e:
+        print(f"  [Rank] US TOP 20 네이버 조회 실패: {e}")
+
+    if len(candidates) >= 20:
+        sorted_items = [item for _, item in sorted(candidates.values(), key=lambda x: x[0], reverse=True)]
+        return sorted_items[:20]
+
+    print("  [Rank] US TOP 20 기본 후보 목록으로 폴백")
+    ranked = [item for _, item in sorted(candidates.values(), key=lambda x: x[0], reverse=True)]
+    seen = {x["ticker"] for x in ranked}
+    for t in DEFAULT_US_TOP20:
+        if t not in seen:
+            ranked.append({
+                "name": _clean_kr_stock_name(t, t),
+                "ticker": t,
+                "currency": "USD",
+            })
+            if len(ranked) >= 20:
+                break
+    return ranked[:20]
+
 
 def fetch_naver_bulk(code6_list):
     """네이버 금융으로 KR 종목 PER·배당률(분배율) 일괄 취득.
@@ -332,11 +482,24 @@ def downsample_weekly(series):
 # ──────────────────────────────────────────────────────────
 def fetch_all():
     print(f"\n[StockScope] 데이터 업데이트 시작: {TODAY}")
-    print(f"  총 {len(ALL_TICKERS)}개 티커 다운로드 중...")
+
+    # 1) 시가총액 기준 TOP 20 / KR TOP 20 동적 조회 및 STOCKS 등록
+    print("  [Rank] US TOP 20 & KR TOP 20 시가총액 순위 조회 중...")
+    us_top20 = fetch_us_top20()
+    kr_top20 = fetch_kr_top20()
+    for item in us_top20 + kr_top20:
+        t = item["ticker"]
+        if t not in STOCKS:
+            STOCKS[t] = {"name": item["name"], "currency": item["currency"]}
+
+    all_tickers = list(STOCKS.keys())
+    print(f"  [Rank] US TOP 20 (1~5위): {[x['ticker'] for x in us_top20[:5]]}")
+    print(f"  [Rank] KR TOP 20 (1~5위): {[x['name'] for x in kr_top20[:5]]}")
+    print(f"  총 {len(all_tickers)}개 티커 다운로드 중...")
 
     # 5년치 일봉 일괄 다운로드
     raw = yf.download(
-        ALL_TICKERS,
+        all_tickers,
         period="5y",
         auto_adjust=True,
         progress=True,
@@ -344,10 +507,17 @@ def fetch_all():
         threads=True,
     )
 
-    result = {"updated": TODAY, "stocks": {}}
+    result = {
+        "updated": TODAY,
+        "rankings": {
+            "top20": us_top20,
+            "kr-top20": kr_top20,
+        },
+        "stocks": {},
+    }
 
     # 한국 종목 PER·배당률 일괄 조회 (네이버 금융)
-    kr_codes = [t.split('.')[0] for t in ALL_TICKERS if t.endswith('.KS')]
+    kr_codes = [t.split('.')[0] for t in all_tickers if t.endswith('.KS')]
     naver_data = fetch_naver_bulk(kr_codes)
     print(f"  [Naver] {len(naver_data)}/{len(kr_codes)}개 KR 종목 데이터 취득")
 
@@ -360,11 +530,13 @@ def fetch_all():
         print(f"  [Beta] ^GSPC 다운로드 실패: {e}")
         gspc_hist = None
 
-    for ticker in ALL_TICKERS:
+    us_mcap = {}  # ticker -> marketCap (USD)
+
+    for ticker in all_tickers:
         meta = STOCKS[ticker]
         try:
             # 멀티인덱스 처리
-            if len(ALL_TICKERS) == 1:
+            if len(all_tickers) == 1:
                 hist = raw["Close"].dropna()
             else:
                 try:
@@ -452,6 +624,9 @@ def fetch_all():
                 # 미국 종목 → yfinance
                 try:
                     info = yf.Ticker(ticker).info
+                    mcap = info.get('marketCap')
+                    if mcap and mcap > 0:
+                        us_mcap[ticker] = float(mcap)
                     div_rate = info.get('trailingAnnualDividendRate') or 0
                     div_yield = round(float(div_rate) / price * 100, 2) if div_rate and price else None
                     if div_yield is None:
@@ -524,6 +699,17 @@ def fetch_all():
             print(f"  ERR {ticker}: {e}")
             result["stocks"][ticker] = {"name": meta["name"], "currency": meta["currency"]}
 
+    # yfinance 시가총액(marketCap)이 충분히 수집된 경우 US TOP 20 순위를 최신 시가총액 기준으로 재정렬
+    if len(us_mcap) >= 20:
+        # us_top20 후보 + 전체 개별 미국 주식 중 시총 상위 20개 추출
+        pool = {item["ticker"]: item for item in us_top20}
+        for t, mcap in us_mcap.items():
+            if t not in NO_PER_TICKERS and not t.endswith('.KS') and t not in ("VOO", "QQQ", "DIA", "IWM"):
+                if t not in pool:
+                    pool[t] = {"name": STOCKS[t]["name"], "ticker": t, "currency": "USD"}
+        sorted_us = sorted(pool.values(), key=lambda x: us_mcap.get(x["ticker"], 0), reverse=True)
+        result["rankings"]["top20"] = sorted_us[:20]
+
     return result
 
 
@@ -540,7 +726,7 @@ if __name__ == "__main__":
     data = fetch_all()
 
     ok = sum(1 for v in data["stocks"].values() if v.get("price"))
-    print(f"\n  성공: {ok}/{len(ALL_TICKERS)} 티커")
+    print(f"\n  성공: {ok}/{len(data['stocks'])} 티커")
 
     save_json(data)
     print(f"  소요 시간: {time.time()-t0:.1f}초")

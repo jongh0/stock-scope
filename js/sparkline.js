@@ -87,7 +87,7 @@ function createRsiChart(values, opts = {}) {
     height    = 22,
     upColor   = '#22c55e',
     downColor = '#ef4444',
-    neutral   = '#64748b',
+    neutral   = '#71717a',
   } = opts;
 
   if (!values || values.length < 2) {
@@ -169,6 +169,6 @@ function getChartColors() {
   return {
     up:      isDark ? '#22c55e' : '#16a34a',
     down:    isDark ? '#ef4444' : '#dc2626',
-    neutral: isDark ? '#64748b' : '#94a3b8',
+    neutral: isDark ? '#71717a' : '#94a3b8',
   };
 }
