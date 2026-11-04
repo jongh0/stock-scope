@@ -89,6 +89,10 @@ class StockScope {
     document.documentElement.dataset.theme = theme;
     btn.innerHTML = theme === 'dark' ? _SUN_ICON : _MOON_ICON;
     btn.title = theme === 'dark' ? '라이트 모드' : '다크 모드';
+    const metaTheme = document.getElementById('metaThemeColor');
+    if (metaTheme) {
+      metaTheme.setAttribute('content', theme === 'dark' ? '#161618' : '#f8fafc');
+    }
   }
 
   /* ── 데이터 로드 ───────────────────────────────────────── */
@@ -439,4 +443,12 @@ class StockScope {
 /* ── 앱 시작 ────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   window.app = new StockScope();
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(err => {
+        console.warn('Service Worker 등록 실패:', err);
+      });
+    });
+  }
 });
